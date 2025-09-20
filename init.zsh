@@ -1,4 +1,4 @@
-# Single-file module for gcloud completions in Zimfw.
+# A robust, single-file module for gcloud completions in Zimfw.
 # It defines functions immediately and defers completion registration
 # until after the Zsh completion system is fully initialized.
 
@@ -87,9 +87,12 @@ if [[ -n "${CLOUDSDK_HOME}" ]]; then
     }
 
     _bq_completer() {
+      # The _describe utility is part of the Zsh completion system,
+      # which might not be loaded yet. Calling another function to generate
+      # completions is more robust here.
       local -a commands
       commands=(${(f)"$(CLOUDSDK_COMPONENT_MANAGER_DISABLE_UPDATE_CHECK=1 bq help | command grep '^[^ ][^ ]*  ' | command sed 's/ .*//')"}" )
-      _describe 'bq commands' commands
+      compadd -a commands
     }
 
     # This function will register our completions.
@@ -110,6 +113,3 @@ if [[ -n "${CLOUDSDK_HOME}" ]]; then
       autoload -Uz add-zsh-hook
       add-zsh-hook precmd _gcloud_register_completions
     fi
-
-  fi
-fi
