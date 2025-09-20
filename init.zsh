@@ -3,12 +3,13 @@
 # until after the Zsh completion system is fully initialized.
 
 # --- Find the Google Cloud SDK ---
-# Use a local variable to avoid polluting the global scope.
-local gcloud_sdk_home_found=""
+# Use a script-level variable to avoid polluting the global scope.
+# This variable is unset at the end of this block.
+gcloud_sdk_home_found=""
 
 if [[ -z "${CLOUDSDK_HOME}" ]]; then
   setopt local_options null_glob
-  local search_locations=(
+  search_locations=(
     "$HOME/google-cloud-sdk"
     "/usr/local/share/google-cloud-sdk"
     "/usr/local/Caskroom/google-cloud-sdk/latest/google-cloud-sdk"
@@ -22,6 +23,7 @@ if [[ -z "${CLOUDSDK_HOME}" ]]; then
     "/opt/google-cloud-sdk"
     "/opt/google-cloud-cli"
     "/opt/local/libexec/google-cloud-sdk"
+    "$HOME/.asdf/installs/gcloud"/*/
   )
 
   for gcloud_sdk_location in "${search_locations[@]}"; do
@@ -58,24 +60,23 @@ if [[ -n "${CLOUDSDK_HOME}" ]]; then
         if [[ $COMP_LINE == 'gcloud '* ]]; then
             if [[ $3 == ssh && $2 == *@* ]]; then
                 prefix=${2%@*}@
-                COMP_LINE=${COMP_LINE%$2}"${2#*@}"
+                COMP_LINE=${COMP_LINE%"$2"}"${2#*@}"
             elif [[ $2 == *'='* ]]; then
                 prefix=${2%=*}'='
-                COMP_LINE=${COMP_LINE%$2}${2/'='/' '}
+                COMP_LINE=${COMP_LINE%"$2"}${2/'='/' '}
             fi
         fi
         local IFS=$'\v'
-        COMPREPLY=( $(IFS="$IFS" \
+        if ! COMPREPLY=( $(IFS="$IFS" \
             COMP_LINE="$COMP_LINE" \
             COMP_POINT="$COMP_POINT" \
             _ARGCOMPLETE_COMP_WORDBREAKS="$COMP_WORDBREAKS" \
             _ARGCOMPLETE=1 \
-            "$1" 8>&1 9>&2 1>/dev/null 2>/dev/null) )
-        if [[ $? != 0 ]]; then
+            "$1" 8>&1 9>&2 1>/dev/null 2>/dev/null) ); then
             unset COMPREPLY
             return
         fi
-        if [[ ${#COMPREPLY[@]} == 1 && $COMPREPLY != *[=' '] ]]; then
+        if [[ ${#COMPREPLY[@]} == 1 && ${COMPREPLY[1]} != *[=' '] ]]; then
             COMPREPLY+=' '
         fi
         if [[ -n "$prefix" ]]; then
@@ -87,7 +88,10 @@ if [[ -n "${CLOUDSDK_HOME}" ]]; then
 
     _bq_completer() {
       local -a commands
-      commands=(${(f)"$(CLOUDSDK_COMPONENT_MANAGER_DISABLE_UPDATE_CHECK=1 bq help | command grep '^[^ ][^ ]*  ' | command sed 's/ .*//')"}" )
+      # This is the idiomatic Zsh way to split command output into an array.
+      # shellcheck disable=SC2206
+      commands=(${(f)"$(CLOUDSDK_COMPONENT_MANAGER_DISABLE_UPDATE_CHECK=1 bq help | command grep '^[^ ][^ ]*  ' | command sed 's/ .*//')"})
+      # shellcheck disable=SC2034
       compadd -a commands
     }
 
@@ -103,6 +107,7 @@ if [[ -n "${CLOUDSDK_HOME}" ]]; then
     # If compinit has already run, register immediately.
     # Otherwise, hook the registration function to run at the first prompt,
     # which is guaranteed to be after compinit has finished.
+    # `$+functions` is the correct Zsh way to check for a function's existence.
     if (( $+functions[compdef] )); then
       _gcloud_register_completions
     else
