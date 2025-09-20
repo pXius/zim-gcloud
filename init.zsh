@@ -1,5 +1,6 @@
-# Purpose: Find Google Cloud SDK, set up the environment, and define functions.
-# This runs BEFORE the completion system is initialized.
+# Single-file module for gcloud completions in Zimfw.
+# It defines functions immediately and defers completion registration
+# until after the Zsh completion system is fully initialized.
 
 # --- Find the Google Cloud SDK ---
 # Use a local variable to avoid polluting the global scope.
@@ -39,7 +40,8 @@ if [[ -n "$gcloud_sdk_home_found" ]]; then
 fi
 unset gcloud_sdk_home_found
 
-# --- Setup Environment and Define Functions if SDK was found ---
+# --- Setup Environment, Define Functions, and Register Completions ---
+# Proceed only if the Google Cloud SDK was found.
 if [[ -n "${CLOUDSDK_HOME}" ]]; then
   export CLOUDSDK_HOME
 
@@ -48,7 +50,7 @@ if [[ -n "${CLOUDSDK_HOME}" ]]; then
     source "${CLOUDSDK_HOME}/path.zsh.inc"
   fi
 
-  # Define completion functions only once per session to be safe.
+  # Define completion functions only once per session.
   if [[ -z "${__GCLOUD_COMPLETION_FUNCS_DEFINED:-}" ]]; then
     __GCLOUD_COMPLETION_FUNCS_DEFINED=1
 
@@ -84,26 +86,30 @@ if [[ -n "${CLOUDSDK_HOME}" ]]; then
         fi
     }
 
-    _completer() {
-        local command=$1 name=$2
-        # Use a temporary variable to hold commands to avoid relying on eval's timing.
-        local -a commands_list
-        if (( ! ${+__GCLOUD_COMMANDS_CACHE[$name]} )); then
-            __GCLOUD_COMMANDS_CACHE[$name]="$(${(z)command})"
-        fi
-        commands_list=("${(f)__GCLOUD_COMMANDS_CACHE[$name]}")
-
-        # Basic completion logic
-        local current_word=$words[CURRENT]
-        COMPREPLY=(${(M)commands_list:#$current_word*})
-    }
-
     _bq_completer() {
-        _completer "CLOUDSDK_COMPONENT_MANAGER_DISABLE_UPDATE_CHECK=1 bq help | grep '^[^ ][^ ]*  ' | sed 's/ .*//'" bq
+      local -a commands
+      commands=(${(f)"$(CLOUDSDK_COMPONENT_MANAGER_DISABLE_UPDATE_CHECK=1 bq help | command grep '^[^ ][^ ]*  ' | command sed 's/ .*//')"}" )
+      _describe 'bq commands' commands
     }
+
+    # This function will register our completions.
+    _gcloud_register_completions() {
+      compdef _python_argcomplete gcloud
+      compdef _python_argcomplete gsutil
+      compdef _bq_completer bq
+      # Unhook ourselves so this function doesn't run on every prompt.
+      add-zsh-hook -d precmd _gcloud_register_completions
+    }
+
+    # If compinit has already run, register immediately.
+    # Otherwise, hook the registration function to run at the first prompt,
+    # which is guaranteed to be after compinit has finished.
+    if (( $+functions[compdef] )); then
+      _gcloud_register_completions
+    else
+      autoload -Uz add-zsh-hook
+      add-zsh-hook precmd _gcloud_register_completions
+    fi
 
   fi
 fi
-
-# Initialize a global associative array for caching if it doesn't exist
-typeset -gA __GCLOUD_COMMANDS_CACHE &>/dev/null
