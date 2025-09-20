@@ -38,13 +38,13 @@ if [[ -n "${CLOUDSDK_HOME}" ]]; then
 
     _python_argcomplete() {
         local prefix=
-        if [[ $COMP_LINE == 'gcloud '* ]]; then
-            if [[ $3 == ssh && $2 == *@* ]]; then
-                prefix=${2%@*}@
-                COMP_LINE=${COMP_LINE%$2}"${2#*@}"
-            elif [[ $2 == *'='* ]]; then
-                prefix=${2%=*}'='
-                COMP_LINE=${COMP_LINE%$2}${2/'='/' '}
+        if [[ $words[1] == gcloud ]]; then
+            if [[ $words[2] == ssh && $words[3] == *@* ]]; then
+                prefix=${words[3]%@*}@
+                COMP_LINE=${COMP_LINE%$words[3]}"${words[3]#*@}"
+            elif [[ $words[2] == *'='* ]]; then
+                prefix=${words[2]%=*}'='
+                COMP_LINE=${COMP_LINE%$words[2]}${words[2]/'='/' '}
             fi
         fi
         local IFS=$'\v'
@@ -66,33 +66,17 @@ if [[ -n "${CLOUDSDK_HOME}" ]]; then
                 COMPREPLY[$i-1]=$prefix${COMPREPLY[$i-1]}
             done
         fi
+        reply=("${COMPREPLY[@]}")
     }
 
-    _completer() {
-        command=$1
-        name=$2
-        eval '[[ -n "$'"${name}"'_COMMANDS" ]] || '"${name}"'_COMMANDS="$('"${command}"')"'
-        set -- $COMP_LINE
-        shift
-        while [[ $1 == -* ]]; do
-              shift
-        done
-        [[ -n "$2" ]] && return
-        grep -q "${name}\s*$" <<< $COMP_LINE &&
-            eval 'COMPREPLY=($'"${name}"'_COMMANDS)' &&
-            return
-        [[ "$COMP_LINE" == *" " ]] && return
-        [[ -n "$1" ]] &&
-            eval 'COMPREPLY=($(echo "$'"${name}"'_COMMANDS" | grep ^'"$1"'))'
-    }
-
-    unset bq_COMMANDS
     _bq_completer() {
-        _completer "CLOUDSDK_COMPONENT_MANAGER_DISABLE_UPDATE_CHECK=1 bq help | grep '^[^ ][^ ]*  ' | sed 's/ .*//'" bq
+        local cmds
+        cmds=$(CLOUDSDK_COMPONENT_MANAGER_DISABLE_UPDATE_CHECK=1 bq help | grep '^[^ ][^ ]*  ' | sed 's/ .*//')
+        reply=(${(f)cmds})
     }
 
-    complete -o nospace -o default -F _python_argcomplete gcloud
-    complete -o default -F _bq_completer bq
-    complete -o nospace -F _python_argcomplete gsutil
+    compdef _python_argcomplete gcloud
+    compdef _python_argcomplete gsutil
+    compdef _bq_completer bq
   fi
 fi
