@@ -16,14 +16,34 @@ jobs:
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Get latest release info
+      - name: Get latest release info with retry
         id: release
         run: |
-          RELEASE_INFO=$(curl -s https://api.github.com/repos/pXius/gcloud-zsh-complete/releases/latest)
-          DOWNLOAD_URL=$(echo "$RELEASE_INFO" | jq -r '.assets[] | select(.name == "_gcloud") | .browser_download_url')
-          RELEASE_TAG=$(echo "$RELEASE_INFO" | jq -r '.tag_name')
-          echo "download_url=$DOWNLOAD_URL" >> $GITHUB_OUTPUT
-          echo "release_tag=$RELEASE_TAG" >> $GITHUB_OUTPUT
+          for i in {1..3}; do
+            echo "Attempt $i of 3..."
+            RELEASE_INFO=$(curl -s --max-time 30 https://api.github.com/repos/pXius/gcloud-zsh-complete/releases/latest)
+
+            # Check if curl succeeded and we got valid JSON with assets
+            if [ $? -eq 0 ] && echo "$RELEASE_INFO" | jq -e '.assets[0]' > /dev/null 2>&1; then
+              DOWNLOAD_URL=$(echo "$RELEASE_INFO" | jq -r '.assets[] | select(.name == "_gcloud") | .browser_download_url')
+              RELEASE_TAG=$(echo "$RELEASE_INFO" | jq -r '.tag_name')
+
+              if [ -n "$DOWNLOAD_URL" ] && [ "$DOWNLOAD_URL" != "null" ]; then
+                echo "Successfully retrieved release info"
+                echo "download_url=$DOWNLOAD_URL" >> $GITHUB_OUTPUT
+                echo "release_tag=$RELEASE_TAG" >> $GITHUB_OUTPUT
+                break
+              fi
+            fi
+
+            if [ $i -eq 3 ]; then
+              echo "Failed to get release info after 3 attempts"
+              exit 1
+            fi
+
+            echo "Attempt $i failed, retrying in 5 seconds..."
+            sleep 5
+          done
 
       - name: Check if update needed
         id: check
