@@ -1,0 +1,62 @@
+name: Update gcloud completions
+on:
+  schedule:
+    - cron: "0 3 * * 1" # Every Monday at 3 AM UTC
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  actions: read
+
+jobs:
+  update-completions:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Get latest release info
+        id: release
+        run: |
+          RELEASE_INFO=$(curl -s https://api.github.com/repos/pXius/gcloud-zsh-complete/releases/latest)
+          DOWNLOAD_URL=$(echo "$RELEASE_INFO" | jq -r '.assets[] | select(.name == "_gcloud") | .browser_download_url')
+          RELEASE_TAG=$(echo "$RELEASE_INFO" | jq -r '.tag_name')
+          echo "download_url=$DOWNLOAD_URL" >> $GITHUB_OUTPUT
+          echo "release_tag=$RELEASE_TAG" >> $GITHUB_OUTPUT
+
+      - name: Check if update needed
+        id: check
+        run: |
+          mkdir -p functions
+
+          # Get current file hash if it exists
+          if [ -f "functions/_gcloud" ]; then
+            CURRENT_HASH=$(sha256sum functions/_gcloud | cut -d' ' -f1)
+          else
+            CURRENT_HASH=""
+          fi
+
+          # Download and get new hash
+          curl -L -s -o functions/_gcloud.new "${{ steps.release.outputs.download_url }}"
+          NEW_HASH=$(sha256sum functions/_gcloud.new | cut -d' ' -f1)
+
+          echo "current_hash=$CURRENT_HASH" >> $GITHUB_OUTPUT
+          echo "new_hash=$NEW_HASH" >> $GITHUB_OUTPUT
+
+          if [ "$CURRENT_HASH" != "$NEW_HASH" ]; then
+            echo "update_needed=true" >> $GITHUB_OUTPUT
+            mv functions/_gcloud.new functions/_gcloud
+          else
+            echo "update_needed=false" >> $GITHUB_OUTPUT
+            rm functions/_gcloud.new
+          fi
+
+      - name: Commit changes
+        if: steps.check.outputs.update_needed == 'true'
+        run: |
+          git config --global user.name 'github-actions[bot]'
+          git config --global user.email 'github-actions[bot]@users.noreply.github.com'
+          git add functions/_gcloud
+          git commit -m "Update gcloud completions to ${{ steps.release.outputs.release_tag }}"
+          git push

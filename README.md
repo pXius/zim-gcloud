@@ -5,7 +5,6 @@ A [zimfw](https://zimfw.sh) module that automatically configures the
 
 - Adds the `gcloud` binaries to your `PATH`.  
 - Enables `zsh` completions for `gcloud`.  
-- Works with common installation locations (brew, apt, snap, asdf, manual installs, etc.).  
 
 ## Prerequisites
 
