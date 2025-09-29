@@ -58,6 +58,7 @@ _gcloud_dispatch() {
                 'certificate-manager:Manage SSL certificates for your Google Cloud projects.'
                 'cheat-sheet:Display gcloud cheat sheet.'
                 'cloud-shell:Manage Google Cloud Shell.'
+                'cloudlocationfinder:Manage Cloudlocationfinder resources.'
                 'colab:Manage Colab Enterprise resources.'
                 'components:List, install, update, or remove Google Cloud CLI components.'
                 'composer:Create and manage Cloud Composer Environments.'
@@ -1302,6 +1303,7 @@ _gcloud_dispatch() {
             commands=(
                 'delete:Delete an Artifact Registry package version.'
                 'describe:Describe an Artifact Registry package version.'
+                'export:Export an Artifact Registry package version.'
                 'list:List Artifact Registry package versions.'
                 'update:Update annotations on an Artifact Registry package version.'
             )
@@ -2242,6 +2244,22 @@ _gcloud_dispatch() {
             )
             _describe 'command' commands
             ;;
+        'gcloud cloudlocationfinder')
+            local -a commands
+            commands=(
+                'cloud-locations:Manage Cloud Location resources.'
+            )
+            _describe 'command' commands
+            ;;
+        'gcloud cloudlocationfinder cloud-locations')
+            local -a commands
+            commands=(
+                'describe:Describe a Cloud Location.'
+                'list:List cloudLocations.'
+                'search:Search cloudLocations.'
+            )
+            _describe 'command' commands
+            ;;
         'gcloud colab')
             local -a commands
             commands=(
@@ -2900,7 +2918,7 @@ _gcloud_dispatch() {
             commands=(
                 'add-iam-policy-binding:Add IAM policy binding to a Compute Engine instance template.'
                 'create:Create a Compute Engine virtual machine instance template.'
-                'create-with-container:Creates a Compute Engine a virtual machine instance template that runs     a Docker container.'
+                'create-with-container:\(DEPRECATED\)  Creates a Compute Engine a virtual machine instance template that runs     a Docker container.'
                 'delete:Delete Compute Engine virtual machine instance templates.'
                 'describe:Describe a virtual machine instance template.'
                 'get-iam-policy:Get the IAM policy for a Compute Engine instance template.'
@@ -2922,7 +2940,7 @@ _gcloud_dispatch() {
                 'attach-disk:Attach a disk to an instance.'
                 'bulk:Manipulate multiple Compute Engine virtual machines with single command executions.'
                 'create:Create Compute Engine virtual machine instances.'
-                'create-with-container:Creates Compute Engine virtual machine instances running     container images.'
+                'create-with-container:\(DEPRECATED\)  Creates Compute Engine virtual machine instances running     container images.'
                 'delete:Delete Compute Engine virtual machine instances.'
                 'delete-access-config:Delete an access configuration from a virtual machine network interface.'
                 'describe:Describe a virtual machine instance.'
@@ -2962,7 +2980,7 @@ _gcloud_dispatch() {
                 'tail-serial-port-output:Periodically fetch new output from a virtual machine instance'\''s serial port and display it as it becomes available.'
                 'update:Update a Compute Engine virtual machine.'
                 'update-access-config:Update a Compute Engine virtual machine access configuration.'
-                'update-container:Updates Compute Engine virtual machine instances running container     images.'
+                'update-container:\(DEPRECATED\)  Updates Compute Engine virtual machine instances running container     images.'
                 'update-from-file:Update a Compute Engine virtual machine instance using a configuration file.'
             )
             _describe 'command' commands
@@ -9433,6 +9451,7 @@ _gcloud_dispatch() {
                 'list:List Cloud NetApp Volumes.'
                 'quota-rules:Create and manage Cloud NetApp Volume QuotaRules.'
                 'replications:Create and manage Cloud NetApp Volume Replications.'
+                'restore-backup-files:Restore specific files from a backup to a Volume.'
                 'revert:Revert a Cloud NetApp Volume back to a specified Snapshot.'
                 'snapshots:Create and manage Cloud NetApp Volume Snapshots.'
                 'update:Update a Cloud NetApp Volume.'
@@ -9723,10 +9742,12 @@ _gcloud_dispatch() {
         'gcloud network-management vpc-flow-logs-configs')
             local -a commands
             commands=(
-                'create:Creates a new VPC Flow Logs configuration in the specified project.'
+                'create:Creates a new VPC Flow Logs configuration.'
                 'delete:Deletes the specified VPC Flow Logs configuration.'
                 'describe:Describe the details of a specific VPC Flow Logs configuration.'
-                'list:List all VPC Flow Logs configurations in the project.'
+                'list:List all VPC Flow Logs configurations.'
+                'query-org-vpc-flow-logs-configs:Fetch all organization-level VPC Flow Logs configurations associated with the project.'
+                'show-effective-flow-logs-configs:Show all effective VPC Flow Logs configurations for a resource.'
                 'update:Updates one or more fields in an existing VPC Flow Logs configuration.'
             )
             _describe 'command' commands
@@ -10370,11 +10391,17 @@ _gcloud_dispatch() {
                 'autonomous-db-versions:Manage Autonomous Db Version resources.'
                 'cloud-exadata-infrastructures:Manage Cloud Exadata Infrastructure resources.'
                 'cloud-vm-clusters:Manage Cloud Vm Cluster resources.'
+                'database-character-sets:Manage Database Character Set resources.'
+                'databases:Manage Database resources.'
+                'db-system-initial-storage-sizes:Manage Db System Initial Storage Size resources.'
                 'db-system-shapes:Manage Db System Shape resources.'
+                'db-systems:Manage Db System resources.'
+                'db-versions:Manage Db Version resources.'
                 'entitlements:Manage Entitlement resources.'
                 'gi-versions:Manage Gi Version resources.'
                 'odb-networks:Manage Odb Network resources.'
                 'operations:Manage Operation resources.'
+                'pluggable-databases:Manage Pluggable Database resources.'
             )
             _describe 'command' commands
             ;;
@@ -10398,6 +10425,7 @@ _gcloud_dispatch() {
                 'create:Create a new AutonomousDatabase.'
                 'delete:Delete an AutonomousDatabase.'
                 'describe:Get details of an AutonomousDatabase.'
+                'failover:Failovers a standby AutonomousDatabase to a new primary.'
                 'generate-wallet:Generate wallet for an AutonomousDatabase.'
                 'list:List all AutonomousDatabases.'
                 'restart:Restarts an AutonomousDatabase.'
@@ -10451,10 +10479,49 @@ _gcloud_dispatch() {
             )
             _describe 'command' commands
             ;;
+        'gcloud oracle-database database-character-sets')
+            local -a commands
+            commands=(
+                'list:List all DatabaseCharacterSets.'
+            )
+            _describe 'command' commands
+            ;;
+        'gcloud oracle-database databases')
+            local -a commands
+            commands=(
+                'describe:Get details of a Database.'
+                'list:List all Databases.'
+            )
+            _describe 'command' commands
+            ;;
+        'gcloud oracle-database db-system-initial-storage-sizes')
+            local -a commands
+            commands=(
+                'list:List all DbSystemInitialStorageSizes.'
+            )
+            _describe 'command' commands
+            ;;
         'gcloud oracle-database db-system-shapes')
             local -a commands
             commands=(
                 'list:List all DbSystemShapes.'
+            )
+            _describe 'command' commands
+            ;;
+        'gcloud oracle-database db-systems')
+            local -a commands
+            commands=(
+                'create:Create a new DbSystem.'
+                'delete:Delete a DbSystem.'
+                'describe:Get details of a DbSystem.'
+                'list:List all DbSystems.'
+            )
+            _describe 'command' commands
+            ;;
+        'gcloud oracle-database db-versions')
+            local -a commands
+            commands=(
+                'list:List all DbVersions.'
             )
             _describe 'command' commands
             ;;
@@ -10501,6 +10568,14 @@ _gcloud_dispatch() {
                 'describe:Describe operations.'
                 'list:List operations.'
                 'wait:Wait operations.'
+            )
+            _describe 'command' commands
+            ;;
+        'gcloud oracle-database pluggable-databases')
+            local -a commands
+            commands=(
+                'describe:Get details of a PluggableDatabase.'
+                'list:List pluggableDatabases.'
             )
             _describe 'command' commands
             ;;
@@ -11621,8 +11696,16 @@ _gcloud_dispatch() {
         'gcloud scheduler')
             local -a commands
             commands=(
+                'cmek-config:Manage CMEK configuration for Cloud Scheduler.'
                 'jobs:Manage Cloud Scheduler jobs.'
                 'locations:Get information about Cloud Scheduler locations.'
+            )
+            _describe 'command' commands
+            ;;
+        'gcloud scheduler cmek-config')
+            local -a commands
+            commands=(
+                'describe:Get CMEK configuration for Cloud Scheduler in the specified location.'
             )
             _describe 'command' commands
             ;;
@@ -12322,6 +12405,7 @@ _gcloud_dispatch() {
                 'buckets:Manage Cloud Storage buckets.'
                 'cat:Outputs the contents of one or more URLs to stdout.'
                 'cp:Upload, download, and copy Cloud Storage objects.'
+                'diagnose:Diagnose Google Cloud Storage.'
                 'du:Displays the amount of space in bytes used by storage resources.'
                 'folders:Manage Cloud Storage folders.'
                 'hash:Calculates hashes on local or cloud files.'
