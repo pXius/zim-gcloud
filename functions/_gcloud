@@ -1179,6 +1179,7 @@ _gcloud_dispatch() {
                 'download:Download an Artifact Registry file.'
                 'list:List Artifact Registry files.'
                 'update:Update annotations on an Artifact Registry file.'
+                'upload:Uploads files to Artifact Registry.'
             )
             _describe 'command' commands
             ;;
@@ -1293,6 +1294,7 @@ _gcloud_dispatch() {
             commands=(
                 'create:Create an Artifact Registry tag.'
                 'delete:Delete an Artifact Registry tag.'
+                'export:Export an Artifact Registry package version by tag.'
                 'list:List Artifact Registry tags.'
                 'update:Update an Artifact Registry tag.'
             )
@@ -2995,6 +2997,8 @@ _gcloud_dispatch() {
         'gcloud compute instances network-interfaces')
             local -a commands
             commands=(
+                'add:Add a Dynamic Network Interface to a Compute Engine instance.'
+                'delete:Delete a Dynamic Network Interface from a Compute Engine instance.'
                 'get-effective-firewalls:Get the effective firewalls for a Compute Engine virtual machine network interface.'
                 'update:Update a Compute Engine virtual machine network interface.'
             )
@@ -4010,7 +4014,7 @@ _gcloud_dispatch() {
                 'create:Create a new Cloud TPU.'
                 'delete:Deletes a Cloud TPU.'
                 'describe:Describe a Cloud TPU.'
-                'execution-groups:Command group that helps create and manage Cloud TPUs and Compute VMs.'
+                'execution-groups:\(DEPRECATED\)  Command group that helps create and manage Cloud TPUs and Compute VMs.'
                 'list:List Cloud TPUs.'
                 'locations:List or Describe Available Cloud TPU Locations.'
                 'queued-resources:List, create, delete, and manage Queued Resources.'
@@ -4034,10 +4038,10 @@ _gcloud_dispatch() {
         'gcloud compute tpus execution-groups')
             local -a commands
             commands=(
-                'create:Create Google Compute TPUs along with VMs.'
-                'delete:Delete TPU Node + VM created by execution group.'
-                'describe:Describe Google Compute TPU + VM combination.'
-                'list:List TPU Node+VM groups created by execution group.'
+                'create:\(DEPRECATED\)  Create Google Compute TPUs along with VMs.'
+                'delete:\(DEPRECATED\)  Delete TPU Node + VM created by execution group.'
+                'describe:\(DEPRECATED\)  Describe Google Compute TPU + VM combination.'
+                'list:\(DEPRECATED\)  List TPU Node+VM groups created by execution group.'
             )
             _describe 'command' commands
             ;;
@@ -8782,6 +8786,8 @@ _gcloud_dispatch() {
             commands=(
                 'acls:Administer Managed Service for Apache Kafka acls.'
                 'clusters:Administer Managed Service for Apache Kafka clusters.'
+                'connect-clusters:Administer Managed Service for Apache Kafka connect-clusters.'
+                'connectors:Administer Managed Service for Apache Kafka connectors.'
                 'consumer-groups:Administer Managed Service for Apache Kafka consumer groups.'
                 'operations:View Managed Service for Apache Kafka operations.'
                 'topics:Administer Managed Service for Apache Kafka topics.'
@@ -8809,6 +8815,32 @@ _gcloud_dispatch() {
                 'describe:Describe a Managed Service for Apache Kafka cluster.'
                 'list:List all Managed Service for Apache Kafka clusters in a given location.'
                 'update:Update a Managed Service for Apache Kafka cluster.'
+            )
+            _describe 'command' commands
+            ;;
+        'gcloud managed-kafka connect-clusters')
+            local -a commands
+            commands=(
+                'create:Create a Managed Service for Apache Kafka connect cluster.'
+                'delete:Delete a Managed Service for Apache Kafka connect cluster.'
+                'describe:Describe a Managed Service for Apache Kafka connect cluster.'
+                'list:List all Managed Service for Apache Kafka connect clusters in a given location.'
+                'update:Update a Managed Service for Apache Kafka for BigQuery connect cluster.'
+            )
+            _describe 'command' commands
+            ;;
+        'gcloud managed-kafka connectors')
+            local -a commands
+            commands=(
+                'create:Create a Managed Service for Apache Kafka connector.'
+                'delete:Delete a Managed Service for Apache Kafka connector.'
+                'describe:Describe a Managed Service for Apache Kafka connector.'
+                'list:List all Managed Service for Apache Kafka connectors for a given connect cluster.'
+                'pause:Pauses operation of a Managed Service for Apache Kafka connector.'
+                'restart:Restarts a Managed Service for Apache Kafka connector.'
+                'resume:Resumes operation of a stopped Managed Service for Apache Kafka connector.'
+                'stop:Stops operation of a Managed Service for Apache Kafka connector.'
+                'update:Update a Managed Service for Apache Kafka connector.'
             )
             _describe 'command' commands
             ;;
@@ -9757,6 +9789,7 @@ _gcloud_dispatch() {
             commands=(
                 'address-groups:Manage Network Security AddressGroups.'
                 'authorization-policies:Manage Network Security AuthorizationPolicies.'
+                'authz-policies:Manage Network Security '\''AuthzPolicy'\'' resources.'
                 'backend-authentication-configs:Manage Network Security BackendAuthenticationConfigs.'
                 'client-tls-policies:Manage Network Security ClientTlsPolicies.'
                 'firewall-endpoint-associations:Create and manage Firewall Plus endpoint associations.'
@@ -9801,6 +9834,16 @@ _gcloud_dispatch() {
                 'export:Export authorization policy.'
                 'import:Import authorization policy.'
                 'list:List authorization policies.'
+            )
+            _describe 'command' commands
+            ;;
+        'gcloud network-security authz-policies')
+            local -a commands
+            commands=(
+                'delete:Delete an '\''AuthzPolicy'\'' resource.'
+                'describe:Describe an '\''AuthzPolicy'\'' resource.'
+                'import:Import an '\''AuthzPolicy'\'' resource.'
+                'list:List '\''AuthzPolicy'\'' resources.'
             )
             _describe 'command' commands
             ;;
@@ -10398,6 +10441,8 @@ _gcloud_dispatch() {
                 'db-systems:Manage Db System resources.'
                 'db-versions:Manage Db Version resources.'
                 'entitlements:Manage Entitlement resources.'
+                'exadb-vm-clusters:Manage Exadb Vm Cluster resources.'
+                'exascale-db-storage-vaults:Manage Exascale Db Storage Vault resources.'
                 'gi-versions:Manage Gi Version resources.'
                 'odb-networks:Manage Odb Network resources.'
                 'operations:Manage Operation resources.'
@@ -10532,10 +10577,40 @@ _gcloud_dispatch() {
             )
             _describe 'command' commands
             ;;
+        'gcloud oracle-database exadb-vm-clusters')
+            local -a commands
+            commands=(
+                'create:Create exadbVmClusters.'
+                'delete:Delete exadbVmClusters.'
+                'describe:Describe exadbVmClusters.'
+                'list:List exadbVmClusters.'
+                'remove-virtual-machine:remove exadbVmClusters.'
+                'update:Update exadbVmClusters.'
+            )
+            _describe 'command' commands
+            ;;
+        'gcloud oracle-database exascale-db-storage-vaults')
+            local -a commands
+            commands=(
+                'create:Create exascaleDbStorageVaults.'
+                'delete:Delete exascaleDbStorageVaults.'
+                'describe:Describe exascaleDbStorageVaults.'
+                'list:List exascaleDbStorageVaults.'
+            )
+            _describe 'command' commands
+            ;;
         'gcloud oracle-database gi-versions')
             local -a commands
             commands=(
                 'list:List all GiVersions.'
+                'minor-versions:Manage Minor Version resources.'
+            )
+            _describe 'command' commands
+            ;;
+        'gcloud oracle-database gi-versions minor-versions')
+            local -a commands
+            commands=(
+                'list:List minorVersions.'
             )
             _describe 'command' commands
             ;;
@@ -11706,6 +11781,7 @@ _gcloud_dispatch() {
             local -a commands
             commands=(
                 'describe:Get CMEK configuration for Cloud Scheduler in the specified location.'
+                'update:Update CMEK configuration for Cloud Scheduler in the specified location.'
             )
             _describe 'command' commands
             ;;
@@ -11860,10 +11936,21 @@ _gcloud_dispatch() {
         'gcloud service-extensions')
             local -a commands
             commands=(
+                'authz-extensions:Manage Service Extensions '\''AuthzExtension'\'' resources.'
                 'lb-route-extensions:Manage Service Extensions '\''LbRouteExtension'\'' resources.'
                 'lb-traffic-extensions:Manage Service Extensions '\''LbTrafficExtension'\'' resources.'
                 'wasm-plugin-versions:Interact with and manage Service Extensions '\''WasmPluginVersions'\''.'
                 'wasm-plugins:Interact with and manage Service Extensions '\''WasmPlugins'\''.'
+            )
+            _describe 'command' commands
+            ;;
+        'gcloud service-extensions authz-extensions')
+            local -a commands
+            commands=(
+                'delete:Delete an '\''AuthzExtension'\'' resource.'
+                'describe:Describe an '\''AuthzExtension'\'' resource.'
+                'import:Import an '\''AuthzExtension'\'' resource.'
+                'list:List '\''AuthzExtension'\'' resources.'
             )
             _describe 'command' commands
             ;;
@@ -12063,6 +12150,7 @@ _gcloud_dispatch() {
             commands=(
                 'backup-schedules:Manage Cloud Spanner backup schedules.'
                 'backups:Manage Cloud Spanner backups.'
+                'cli:An interactive shell for Spanner.'
                 'databases:Manage Cloud Spanner databases.'
                 'instance-configs:Manage Cloud Spanner instance configs.'
                 'instance-partitions:Manage Spanner instance partitions.'
@@ -12754,6 +12842,7 @@ _gcloud_dispatch() {
         'gcloud vmware')
             local -a commands
             commands=(
+                'announcements:Manage announcements in Google Cloud VMware Engine.'
                 'dns-bind-permission:Manage DNS binding permission in Google Cloud VMware Engine.'
                 'locations:List locations in Google Cloud VMware Engine.'
                 'network-peerings:Manage VMware Engine VPC peering using Google Cloud VMware Engine.'
@@ -12763,6 +12852,13 @@ _gcloud_dispatch() {
                 'operations:List and describe operations in Google Cloud VMware Engine.'
                 'private-clouds:Manage private clouds in Google Cloud VMware Engine.'
                 'private-connections:Manage Private Connections in Google Cloud VMware Engine.'
+            )
+            _describe 'command' commands
+            ;;
+        'gcloud vmware announcements')
+            local -a commands
+            commands=(
+                'list:List announcements in a Google Cloud VMware Engine.'
             )
             _describe 'command' commands
             ;;
@@ -12870,6 +12966,7 @@ _gcloud_dispatch() {
                 'subnets:Manage vmware subnets in Google Cloud VMware Engine.'
                 'undelete:Cancel deletion of a Google Cloud VMware Engine private cloud.'
                 'update:Update a Google Cloud VMware Engine private cloud.'
+                'upgrades:Manage upgrades in Google Cloud VMware Engine.'
                 'vcenter:Manage vCenter resources in Google Cloud VMware Engine.'
             )
             _describe 'command' commands
@@ -12984,6 +13081,14 @@ _gcloud_dispatch() {
                 'describe:Describe a subnet in a VMware Engine private cloud.'
                 'list:List subnets in a VMware Engine private cloud.'
                 'update:Update a subnet.'
+            )
+            _describe 'command' commands
+            ;;
+        'gcloud vmware private-clouds upgrades')
+            local -a commands
+            commands=(
+                'describe:Describe a Google Cloud VMware Engine upgrades.'
+                'list:List upgrades for a Google Cloud VMware Engine private cloud.'
             )
             _describe 'command' commands
             ;;
