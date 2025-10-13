@@ -4011,16 +4011,16 @@ _gcloud_dispatch() {
             local -a commands
             commands=(
                 'accelerator-types:List or Describe Available Cloud TPU accelerator types.'
-                'create:Create a new Cloud TPU.'
-                'delete:Deletes a Cloud TPU.'
-                'describe:Describe a Cloud TPU.'
+                'create:\(DEPRECATED\)  Create a new Cloud TPU.'
+                'delete:\(DEPRECATED\)  Deletes a Cloud TPU.'
+                'describe:\(DEPRECATED\)  Describe a Cloud TPU.'
                 'execution-groups:\(DEPRECATED\)  Command group that helps create and manage Cloud TPUs and Compute VMs.'
-                'list:List Cloud TPUs.'
+                'list:\(DEPRECATED\)  List Cloud TPUs.'
                 'locations:List or Describe Available Cloud TPU Locations.'
                 'queued-resources:List, create, delete, and manage Queued Resources.'
-                'reimage:Reimages the OS on a Cloud TPU.'
-                'start:Start a Cloud TPU.'
-                'stop:Stop a Cloud TPU.'
+                'reimage:\(DEPRECATED\)  Reimages the OS on a Cloud TPU.'
+                'start:\(DEPRECATED\)  Start a Cloud TPU.'
+                'stop:\(DEPRECATED\)  Stop a Cloud TPU.'
                 'topologies:List available Cloud TPU topologies.'
                 'tpu-vm:List, create, and manage Cloud TPU VM nodes.'
                 'versions:Explore Available Tensorflow versions for Cloud TPUs.'
@@ -5684,6 +5684,7 @@ _gcloud_dispatch() {
             commands=(
                 'create:Create a Dataplex encryption config resource.'
                 'describe:Describe an EncryptionConfig.'
+                'update:Update an Encryption Config.'
             )
             _describe 'command' commands
             ;;
@@ -10478,6 +10479,7 @@ _gcloud_dispatch() {
                 'start:Starts an AutonomousDatabase.'
                 'stop:Stops an AutonomousDatabase.'
                 'switchover:Switchovers an AutonomousDatabase to a new primary.'
+                'update:Update autonomousDatabases.'
             )
             _describe 'command' commands
             ;;
@@ -12477,6 +12479,7 @@ _gcloud_dispatch() {
         'gcloud sql users')
             local -a commands
             commands=(
+                'assign-roles:Updates a user'\''s database roles in a given instance.'
                 'create:Creates a user in a given instance.'
                 'delete:Deletes a Cloud SQL user in a given instance.'
                 'describe:Retrieves information about a Cloud SQL user in a given instance.'
