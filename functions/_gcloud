@@ -2493,9 +2493,11 @@ _gcloud_dispatch() {
                 'network-profiles:Read Compute Engine network profiles.'
                 'networks:List, create, and delete Compute Engine networks.'
                 'operations:Read and manipulate Compute Engine operations.'
+                'org-security-policies:Manage Compute Engine organization security policies.'
                 'os-config:Manage OS Config tasks for Compute Engine VM instances.'
                 'os-login:Create and manipulate Compute Engine OS Login resources.'
                 'packet-mirrorings:Manage Compute Engine packet mirroring resources.'
+                'preview-features:Read and manipulate Compute Engine Preview Features.'
                 'project-info:Read and manipulate project-level data like quotas and metadata.'
                 'project-zonal-metadata:Describe and update project zonal metadata.'
                 'public-advertised-prefixes:Manage public advertised prefix resources.'
@@ -2955,7 +2957,7 @@ _gcloud_dispatch() {
                 'get-shielded-identity:Get the Shielded identity for a Compute Engine instance.'
                 'import:Create Compute Engine virtual machine instances from virtual appliance in OVA/OVF format.'
                 'list:List Compute Engine instances.'
-                'move:\(DEPRECATED\)  Move an instance and its attached persistent disks between zones.'
+                'move:\(REMOVED\)  Move an instance and its attached persistent disks between zones.'
                 'network-interfaces:Read and manipulate Compute Engine instance network interfaces.'
                 'ops-agents:Manage Google Cloud Observability agents for Compute Engine VM instances.'
                 'os-inventory:Read Compute Engine OS Inventory Data and Related Resources.'
@@ -3047,6 +3049,7 @@ _gcloud_dispatch() {
                 'application-awareness:Read and manipulate configuration for application awareness on Compute Engine interconnect.'
                 'attachments:Read and manipulate Compute Engine interconnect attachments.'
                 'create:Create a Compute Engine interconnect.'
+                'cross-site-networks:Create or manipulate cross site networks.'
                 'delete:Delete Compute Engine interconnects.'
                 'describe:Describe a Compute Engine interconnect.'
                 'get-diagnostics:Get diagnostics of a Compute Engine interconnect.'
@@ -3056,6 +3059,7 @@ _gcloud_dispatch() {
                 'macsec:Read and manipulate Compute Engine interconnect MACsec configuration.'
                 'remote-locations:Read and manipulate Google Compute Engine interconnect remote locations.'
                 'update:Update a Compute Engine interconnect.'
+                'wire-groups:Create or manipulate wire groups.'
             )
             _describe 'command' commands
             ;;
@@ -3122,6 +3126,17 @@ _gcloud_dispatch() {
             )
             _describe 'command' commands
             ;;
+        'gcloud compute interconnects cross-site-networks')
+            local -a commands
+            commands=(
+                'create:Create a Compute Engine cross site network.'
+                'delete:Delete Compute Engine cross site networks.'
+                'describe:Describe a Compute Engine cross site network.'
+                'list:List Google Compute Engine cross site networks.'
+                'update:Update a Compute Engine cross site network.'
+            )
+            _describe 'command' commands
+            ;;
         'gcloud compute interconnects groups')
             local -a commands
             commands=(
@@ -3161,6 +3176,21 @@ _gcloud_dispatch() {
             commands=(
                 'describe:Describe a Google Compute Engine interconnect remote location.'
                 'list:List Google Compute Engine Cloud Interconnect remote locations.'
+            )
+            _describe 'command' commands
+            ;;
+        'gcloud compute interconnects wire-groups')
+            local -a commands
+            commands=(
+                'add-endpoint:Add endpoint to a Compute Engine wire group.'
+                'add-interconnect:Add interconnect to a Compute Engine wire group.'
+                'create:Create a Compute Engine wire group.'
+                'delete:Delete Compute Engine wire groups.'
+                'describe:Describe a Compute Engine wire group.'
+                'list:List Google Compute Engine wire groups.'
+                'remove-endpoint:Remove endpoint from a Compute Engine wire group.'
+                'remove-interconnect:Remove interconnect from a wire group.'
+                'update:Update a Compute Engine wire group.'
             )
             _describe 'command' commands
             ;;
@@ -3398,6 +3428,43 @@ _gcloud_dispatch() {
             )
             _describe 'command' commands
             ;;
+        'gcloud compute org-security-policies')
+            local -a commands
+            commands=(
+                'associations:Read and manipulate Compute Engine organization security policy associations.'
+                'copy-rules:Replace the rules of a Compute Engine organization security policy with rules from another policy.'
+                'create:Create a Compute Engine organization security policy.'
+                'delete:Delete a Compute Engine organization security policy.'
+                'describe:Describe a Compute Engine organization security policy.'
+                'list:List Compute Engine organization security policies.'
+                'list-rules:List the rules of a Compute Engine organization security policy.'
+                'move:Move a Compute Engine organization security policy.'
+                'rules:Read and manipulate Compute Engine organization security policy rules.'
+                'update:Update a Compute Engine organization security policy.'
+            )
+            _describe 'command' commands
+            ;;
+        'gcloud compute org-security-policies associations')
+            local -a commands
+            commands=(
+                'create:Create a new association between a security policy and an organization or folder resource.'
+                'delete:Delete a Compute Engine organization security policy association.'
+                'list:List the associations of an organization or folder resource.'
+            )
+            _describe 'command' commands
+            ;;
+        'gcloud compute org-security-policies rules')
+            local -a commands
+            commands=(
+                'add-preconfig-waf-exclusion:Add an exclusion configuration for preconfigured WAF evaluation into a security policy rule.'
+                'create:Create a Compute Engine organizationsecurity policy rule.'
+                'delete:Delete a Compute Engine organization security policy rule.'
+                'describe:Describe a Compute Engine organization security policy rule.'
+                'remove-preconfig-waf-exclusion:Remove an exclusion configuration for preconfigured WAF evaluation from a security policy rule.'
+                'update:Update a Compute Engine security policy rule.'
+            )
+            _describe 'command' commands
+            ;;
         'gcloud compute os-config')
             local -a commands
             commands=(
@@ -3532,6 +3599,15 @@ _gcloud_dispatch() {
             )
             _describe 'command' commands
             ;;
+        'gcloud compute preview-features')
+            local -a commands
+            commands=(
+                'describe:Describe a preview feature.'
+                'list:View preview features.'
+                'update:Update a preview feature'\''s activation status.'
+            )
+            _describe 'command' commands
+            ;;
         'gcloud compute project-info')
             local -a commands
             commands=(
@@ -3624,6 +3700,7 @@ _gcloud_dispatch() {
                 'describe:Describe a Compute Engine reservation sub-block.'
                 'list:List Compute Engine reservation sub-blocks.'
                 'perform-maintenance:Perform maintenance on a reservation sub-block.'
+                'report-subblock-as-faulty:Report a sub-block within a reservation as faulty.'
             )
             _describe 'command' commands
             ;;
@@ -4011,16 +4088,16 @@ _gcloud_dispatch() {
             local -a commands
             commands=(
                 'accelerator-types:List or Describe Available Cloud TPU accelerator types.'
-                'create:\(DEPRECATED\)  Create a new Cloud TPU.'
-                'delete:\(DEPRECATED\)  Deletes a Cloud TPU.'
-                'describe:\(DEPRECATED\)  Describe a Cloud TPU.'
-                'execution-groups:\(DEPRECATED\)  Command group that helps create and manage Cloud TPUs and Compute VMs.'
-                'list:\(DEPRECATED\)  List Cloud TPUs.'
+                'create:\(REMOVED\)  Create a new Cloud TPU.'
+                'delete:\(REMOVED\)  Deletes a Cloud TPU.'
+                'describe:\(REMOVED\)  Describe a Cloud TPU.'
+                'execution-groups:\(REMOVED\)  Command group that helps create and manage Cloud TPUs and Compute VMs.'
+                'list:\(REMOVED\)  List Cloud TPUs.'
                 'locations:List or Describe Available Cloud TPU Locations.'
                 'queued-resources:List, create, delete, and manage Queued Resources.'
-                'reimage:\(DEPRECATED\)  Reimages the OS on a Cloud TPU.'
-                'start:\(DEPRECATED\)  Start a Cloud TPU.'
-                'stop:\(DEPRECATED\)  Stop a Cloud TPU.'
+                'reimage:\(REMOVED\)  Reimages the OS on a Cloud TPU.'
+                'start:\(REMOVED\)  Start a Cloud TPU.'
+                'stop:\(REMOVED\)  Stop a Cloud TPU.'
                 'topologies:List available Cloud TPU topologies.'
                 'tpu-vm:List, create, and manage Cloud TPU VM nodes.'
                 'versions:Explore Available Tensorflow versions for Cloud TPUs.'
@@ -4038,10 +4115,10 @@ _gcloud_dispatch() {
         'gcloud compute tpus execution-groups')
             local -a commands
             commands=(
-                'create:\(DEPRECATED\)  Create Google Compute TPUs along with VMs.'
-                'delete:\(DEPRECATED\)  Delete TPU Node + VM created by execution group.'
-                'describe:\(DEPRECATED\)  Describe Google Compute TPU + VM combination.'
-                'list:\(DEPRECATED\)  List TPU Node+VM groups created by execution group.'
+                'create:\(REMOVED\)  Create Google Compute TPUs along with VMs.'
+                'delete:\(REMOVED\)  Delete TPU Node + VM created by execution group.'
+                'describe:\(REMOVED\)  Describe Google Compute TPU + VM combination.'
+                'list:\(REMOVED\)  List TPU Node+VM groups created by execution group.'
             )
             _describe 'command' commands
             ;;
@@ -7301,6 +7378,7 @@ _gcloud_dispatch() {
                 'delete:Delete a Google Cloud Firestore database.'
                 'describe:Describes information about a Cloud Firestore database.'
                 'list:Lists all Firestore databases under the project.'
+                'ping:Times the connection and ping time for a Firestore with MongoDB compatibility database.'
                 'restore:Restores a Cloud Firestore database from a backup.'
                 'update:Update the database configuration of a Cloud Firestore database.'
             )
@@ -10479,7 +10557,7 @@ _gcloud_dispatch() {
                 'start:Starts an AutonomousDatabase.'
                 'stop:Stops an AutonomousDatabase.'
                 'switchover:Switchovers an AutonomousDatabase to a new primary.'
-                'update:Update autonomousDatabases.'
+                'update:Update an AutonomousDatabase.'
             )
             _describe 'command' commands
             ;;
@@ -11776,6 +11854,7 @@ _gcloud_dispatch() {
                 'cmek-config:Manage CMEK configuration for Cloud Scheduler.'
                 'jobs:Manage Cloud Scheduler jobs.'
                 'locations:Get information about Cloud Scheduler locations.'
+                'operations:Get information about Cloud Scheduler operations.'
             )
             _describe 'command' commands
             ;;
@@ -11824,6 +11903,13 @@ _gcloud_dispatch() {
             commands=(
                 'describe:Show details about a location.'
                 'list:Lists the locations where Cloud Scheduler is available.'
+            )
+            _describe 'command' commands
+            ;;
+        'gcloud scheduler operations')
+            local -a commands
+            commands=(
+                'describe:Show the latest status of an operation.'
             )
             _describe 'command' commands
             ;;
