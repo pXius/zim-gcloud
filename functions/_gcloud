@@ -2474,6 +2474,7 @@ _gcloud_dispatch() {
                 'firewall-policies:Manage Compute Engine organization firewall policies.'
                 'firewall-rules:List, create, update, and delete Compute Engine firewall rules.'
                 'forwarding-rules:Read and manipulate traffic forwarding rules to network load balancers.'
+                'future-reservations:Manage Compute Engine future reservations.'
                 'health-checks:Read and manipulate health checks for load balanced instances.'
                 'http-health-checks:Read and manipulate HTTP health checks for load balanced instances.'
                 'https-health-checks:Read and manipulate HTTPS health checks for load balanced instances.'
@@ -2732,6 +2733,18 @@ _gcloud_dispatch() {
                 'list:List Google Compute Engine forwarding rules.'
                 'set-target:Modify a forwarding rule to direct network traffic to a new target.'
                 'update:Update a Compute Engine forwarding rule.'
+            )
+            _describe 'command' commands
+            ;;
+        'gcloud compute future-reservations')
+            local -a commands
+            commands=(
+                'cancel:Cancel a Compute Engine future reservation.'
+                'create:Create a Compute Engine reservation.'
+                'delete:Delete a Compute Engine future reservation.'
+                'describe:Show details about a Compute Engine future reservation.'
+                'list:List Compute Engine future reservations.'
+                'update:Update Compute Engine future reservations.'
             )
             _describe 'command' commands
             ;;
@@ -4088,16 +4101,8 @@ _gcloud_dispatch() {
             local -a commands
             commands=(
                 'accelerator-types:List or Describe Available Cloud TPU accelerator types.'
-                'create:\(REMOVED\)  Create a new Cloud TPU.'
-                'delete:\(REMOVED\)  Deletes a Cloud TPU.'
-                'describe:\(REMOVED\)  Describe a Cloud TPU.'
-                'execution-groups:\(REMOVED\)  Command group that helps create and manage Cloud TPUs and Compute VMs.'
-                'list:\(REMOVED\)  List Cloud TPUs.'
                 'locations:List or Describe Available Cloud TPU Locations.'
                 'queued-resources:List, create, delete, and manage Queued Resources.'
-                'reimage:\(REMOVED\)  Reimages the OS on a Cloud TPU.'
-                'start:\(REMOVED\)  Start a Cloud TPU.'
-                'stop:\(REMOVED\)  Stop a Cloud TPU.'
                 'topologies:List available Cloud TPU topologies.'
                 'tpu-vm:List, create, and manage Cloud TPU VM nodes.'
                 'versions:Explore Available Tensorflow versions for Cloud TPUs.'
@@ -4109,16 +4114,6 @@ _gcloud_dispatch() {
             commands=(
                 'describe:Describe an accelerator type available for Cloud TPUs.'
                 'list:List available accelerator types for Cloud TPUs.'
-            )
-            _describe 'command' commands
-            ;;
-        'gcloud compute tpus execution-groups')
-            local -a commands
-            commands=(
-                'create:\(REMOVED\)  Create Google Compute TPUs along with VMs.'
-                'delete:\(REMOVED\)  Delete TPU Node + VM created by execution group.'
-                'describe:\(REMOVED\)  Describe Google Compute TPU + VM combination.'
-                'list:\(REMOVED\)  List TPU Node+VM groups created by execution group.'
             )
             _describe 'command' commands
             ;;
