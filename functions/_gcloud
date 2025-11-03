@@ -9453,6 +9453,7 @@ _gcloud_dispatch() {
                 'active-directories:Create and manage Cloud NetApp Active Directories.'
                 'backup-policies:Create and manage Cloud NetApp Backup Policies.'
                 'backup-vaults:Create and manage Cloud NetApp Backup Vaults.'
+                'host-groups:Create and manage Cloud NetApp Host Groups.'
                 'kms-configs:Create and manage Cloud NetApp Volumes KMS Configs.'
                 'locations:Get and list locations where Cloud NetApp Files is available.'
                 'operations:Read and manage Cloud NetApp Files Operations.'
@@ -9503,6 +9504,17 @@ _gcloud_dispatch() {
                 'describe:Describe a Cloud NetApp Backup.'
                 'list:List Cloud NetApp Backups.'
                 'update:Update a Cloud NetApp Backup.'
+            )
+            _describe 'command' commands
+            ;;
+        'gcloud netapp host-groups')
+            local -a commands
+            commands=(
+                'create:Create a Cloud NetApp Host Group.'
+                'delete:Delete a Cloud NetApp Host Group.'
+                'describe:Describe a Cloud NetApp Host Group.'
+                'list:List Cloud NetApp Host Groups.'
+                'update:Update a Cloud NetApp Host Group.'
             )
             _describe 'command' commands
             ;;
@@ -10940,6 +10952,7 @@ _gcloud_dispatch() {
             commands=(
                 'certificates:Manage certificates.'
                 'locations:Manage locations.'
+                'operations:Manage operations.'
                 'pools:Manage CA pools.'
                 'roots:Manage root certificate authorities.'
                 'subordinates:Manage subordinate certificate authorities.'
@@ -10963,6 +10976,14 @@ _gcloud_dispatch() {
             local -a commands
             commands=(
                 'list:List supported locations for the Private CA GA API.'
+            )
+            _describe 'command' commands
+            ;;
+        'gcloud privateca operations')
+            local -a commands
+            commands=(
+                'describe:Describe an operation ran on the Private CA API.'
+                'list:List operations for the Private CA API.'
             )
             _describe 'command' commands
             ;;
