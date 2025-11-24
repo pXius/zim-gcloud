@@ -60,6 +60,7 @@ _gcloud_dispatch() {
                 'cloud-shell:Manage Google Cloud Shell.'
                 'cloudlocationfinder:Manage Cloudlocationfinder resources.'
                 'colab:Manage Colab Enterprise resources.'
+                'compliance-manager:Manage Compliance Manager resources.'
                 'components:List, install, update, or remove Google Cloud CLI components.'
                 'composer:Create and manage Cloud Composer Environments.'
                 'compute:Create and manipulate Compute Engine resources.'
@@ -75,6 +76,7 @@ _gcloud_dispatch() {
                 'datastream:Manage Cloud Datastream resources.'
                 'deploy:Create and manage Cloud Deploy resources.'
                 'deployment-manager:Manage deployments of cloud resources.'
+                'design-center:Manage Application Design Center resources.'
                 'developer-connect:Manage Developer Connect resources.'
                 'dns:Manage your Cloud DNS managed-zones and record-sets.'
                 'docker:\(DEPRECATED\)  Enable Docker CLI access to Google Container Registry.'
@@ -1604,6 +1606,7 @@ _gcloud_dispatch() {
             commands=(
                 'delete:Delete the specified Backup.'
                 'describe:Show details of the backup.'
+                'fetch-for-resource-type:Fetch Backups for a given resource type and location.'
                 'list:List Backups.'
                 'restore:Manage restore operations for resources.'
                 'update:Update the specified Backup.'
@@ -1623,6 +1626,7 @@ _gcloud_dispatch() {
             commands=(
                 'describe:Show details of the data source reference.'
                 'fetch-for-resource-type:Fetch Data Source References for a given resource type and location.'
+                'list:List Backup and DR data source references.'
             )
             _describe 'command' commands
             ;;
@@ -2322,6 +2326,68 @@ _gcloud_dispatch() {
             )
             _describe 'command' commands
             ;;
+        'gcloud compliance-manager')
+            local -a commands
+            commands=(
+                'cloud-control-deployments:Manage Cloud Control Deployment resources.'
+                'cloud-controls:Manage Cloud Control resources.'
+                'framework-deployments:Manage Framework Deployment resources.'
+                'frameworks:Manage Framework resources.'
+                'operations:Manage Operation resources.'
+            )
+            _describe 'command' commands
+            ;;
+        'gcloud compliance-manager cloud-control-deployments')
+            local -a commands
+            commands=(
+                'describe:Get a cloud control deployment.'
+                'list:List Cloud Control Deployments.'
+            )
+            _describe 'command' commands
+            ;;
+        'gcloud compliance-manager cloud-controls')
+            local -a commands
+            commands=(
+                'create:Create a cloud control.'
+                'delete:Delete a cloud control.'
+                'describe:Get a cloud control.'
+                'list:List cloud controls.'
+                'update:Update a cloud control.'
+            )
+            _describe 'command' commands
+            ;;
+        'gcloud compliance-manager framework-deployments')
+            local -a commands
+            commands=(
+                'create:Create a framework deployment.'
+                'delete:Delete a framework deployment.'
+                'describe:Get a framework deployment.'
+                'list:List framework deployments.'
+            )
+            _describe 'command' commands
+            ;;
+        'gcloud compliance-manager frameworks')
+            local -a commands
+            commands=(
+                'create:Create a framework.'
+                'delete:Delete a framework.'
+                'describe:Get a framework.'
+                'list:List frameworks.'
+                'update:Update a framework.'
+            )
+            _describe 'command' commands
+            ;;
+        'gcloud compliance-manager operations')
+            local -a commands
+            commands=(
+                'cancel:Cancel operations.'
+                'delete:Delete operations.'
+                'describe:Describe operations.'
+                'list:List operations.'
+                'wait:Wait operations.'
+            )
+            _describe 'command' commands
+            ;;
         'gcloud components')
             local -a commands
             commands=(
@@ -2763,6 +2829,7 @@ _gcloud_dispatch() {
             local -a commands
             commands=(
                 'grpc:Create a gRPC health check to monitor load balanced instances.'
+                'grpc-with-tls:Create a gRPC with TLS health check to monitor load balanced instances.'
                 'http:Create a HTTP health check to monitor load balanced instances.'
                 'http2:Create a HTTP2 health check to monitor load balanced instances.'
                 'https:Create a HTTPS health check to monitor load balanced instances.'
@@ -2775,6 +2842,7 @@ _gcloud_dispatch() {
             local -a commands
             commands=(
                 'grpc:Update a gRPC health check.'
+                'grpc-with-tls:Update a gRPC with TLS health check.'
                 'http:Update a HTTP health check.'
                 'http2:Update a HTTP2 health check.'
                 'https:Update a HTTPS health check.'
@@ -3095,6 +3163,7 @@ _gcloud_dispatch() {
                 'delete:Delete Compute Engine interconnect attachments.'
                 'describe:Describe a Compute Engine interconnect attachment.'
                 'groups:Create or manipulate interconnect attachment groups.'
+                'l2-forwarding:Create or manipulate dedicated interconnect attachments.'
                 'list:List Google Compute Engine interconnect attachments.'
                 'partner:Create or manipulate partner interconnect attachments.'
                 'provider:Create or manipulate partner provider interconnect attachments.'
@@ -3120,6 +3189,19 @@ _gcloud_dispatch() {
                 'list:List interconnect attachment groups.'
                 'remove-members:Remove member interconnect attachments from a Compute Engine interconnect attachment group.'
                 'update:Update a Compute Engine interconnect attachment group.'
+            )
+            _describe 'command' commands
+            ;;
+        'gcloud compute interconnects attachments l2-forwarding')
+            local -a commands
+            commands=(
+                'add-mapping:Add new vlan to ip mapping rule to an L2-forwarding attachment.'
+                'create:Create a Compute Engine L2 forwarding interconnect attachment.'
+                'describe-mapping:Describe a Compute Engine L2 forwarding interconnect attachment.'
+                'list-mapping:List Google Compute Engine interconnect attachments.'
+                'remove-mapping:Remove vlan to ip mapping rule to an L2-forwarding attachment.'
+                'update:Update a Compute Engine L2 forwarding interconnect attachment.'
+                'update-mapping:Update vlan to ip mapping rule to an L2-forwarding attachment.'
             )
             _describe 'command' commands
             ;;
@@ -5729,6 +5811,7 @@ _gcloud_dispatch() {
             local -a commands
             commands=(
                 'data-discovery:Create a Dataplex data discovery scan job.'
+                'data-documentation:Create a Dataplex data documentation scan job.'
                 'data-profile:Create a Dataplex data profile scan job.'
                 'data-quality:Create a Dataplex data quality scan job.'
             )
@@ -5746,6 +5829,7 @@ _gcloud_dispatch() {
             local -a commands
             commands=(
                 'data-discovery:Update a Dataplex data discovery scan job.'
+                'data-documentation:Update a Dataplex data documentation scan job.'
                 'data-profile:Update a Dataplex data profile scan job.'
                 'data-quality:Update a Dataplex data quality scan job.'
             )
@@ -6452,6 +6536,178 @@ _gcloud_dispatch() {
             )
             _describe 'command' commands
             ;;
+        'gcloud design-center')
+            local -a commands
+            commands=(
+                'locations:Manage Design Center Locations.'
+                'operations:Manage Operation resources.'
+                'spaces:Manage space resources.'
+            )
+            _describe 'command' commands
+            ;;
+        'gcloud design-center locations')
+            local -a commands
+            commands=(
+                'describe:Describe a Design Center location.'
+                'list:List Design Center locations.'
+            )
+            _describe 'command' commands
+            ;;
+        'gcloud design-center operations')
+            local -a commands
+            commands=(
+                'cancel:Cancel operations.'
+                'delete:Delete operations.'
+                'describe:Describe operations.'
+                'list:List operations.'
+            )
+            _describe 'command' commands
+            ;;
+        'gcloud design-center spaces')
+            local -a commands
+            commands=(
+                'application-templates:Manage application template resources.'
+                'applications:Manage application resources.'
+                'catalogs:Manage catalog resources.'
+                'create:Create a space.'
+                'delete:Delete a space.'
+                'describe:Describe a space.'
+                'get-iam-policy:Get the IAM policy for a Design Center space.'
+                'list:List spaces.'
+                'set-iam-policy:Set the IAM policy for a Design Center space as defined in a JSON/YAML file.'
+                'shared-templates:Manage shared template resources.'
+                'test-iam-permissions:Test IAM permissions for a Design Center space.'
+                'update:Update a space.'
+            )
+            _describe 'command' commands
+            ;;
+        'gcloud design-center spaces application-templates')
+            local -a commands
+            commands=(
+                'commit:Commit an application template.'
+                'components:Manage component resources.'
+                'create:Create an application template.'
+                'delete:Delete an application template.'
+                'describe:Describe an application template.'
+                'generate:Generate IaC for an application template.'
+                'import:Import to an application template.'
+                'import-iac:Import Infrastructure as Code \(IaC\) for an Application Template.'
+                'list:List application templates.'
+                'revisions:Manage application template revision resources.'
+                'update:Update an application template.'
+            )
+            _describe 'command' commands
+            ;;
+        'gcloud design-center spaces application-templates components')
+            local -a commands
+            commands=(
+                'connections:Manage connection resources.'
+                'create:Create a component.'
+                'delete:Delete a component.'
+                'describe:Describe a component.'
+                'list:List components.'
+                'update:Update a component.'
+            )
+            _describe 'command' commands
+            ;;
+        'gcloud design-center spaces application-templates components connections')
+            local -a commands
+            commands=(
+                'create:Create a connection.'
+                'delete:Delete a connection.'
+                'describe:Describe a connection.'
+                'list:List connections.'
+                'update:Update a connection.'
+            )
+            _describe 'command' commands
+            ;;
+        'gcloud design-center spaces application-templates revisions')
+            local -a commands
+            commands=(
+                'delete:Delete an application template revision.'
+                'describe:Describe an application template revision.'
+                'list:List application template revisions.'
+            )
+            _describe 'command' commands
+            ;;
+        'gcloud design-center spaces applications')
+            local -a commands
+            commands=(
+                'create:Create an application.'
+                'delete:Delete an application.'
+                'deploy:Deploy an application.'
+                'describe:Describe an application.'
+                'generate:Generate IaC for an application.'
+                'import-iac:Import Infrastructure as Code \(IaC\) for an Application.'
+                'list:List applications.'
+                'preview:Preview an application.'
+                'update:Update an application.'
+            )
+            _describe 'command' commands
+            ;;
+        'gcloud design-center spaces catalogs')
+            local -a commands
+            commands=(
+                'create:Create a catalog.'
+                'delete:Delete a catalog.'
+                'describe:Describe a catalog.'
+                'list:List catalogs.'
+                'shares:Manage share resources.'
+                'templates:Manage catalog template resources.'
+                'update:Update a catalog.'
+            )
+            _describe 'command' commands
+            ;;
+        'gcloud design-center spaces catalogs shares')
+            local -a commands
+            commands=(
+                'create:Create a share.'
+                'delete:Delete a share.'
+                'describe:Describe a share.'
+                'list:List shares.'
+                'sync:Sync a share.'
+            )
+            _describe 'command' commands
+            ;;
+        'gcloud design-center spaces catalogs templates')
+            local -a commands
+            commands=(
+                'create:Create a catalog template.'
+                'delete:Delete a catalog template.'
+                'describe:Describe a catalog template.'
+                'list:List catalog templates.'
+                'revisions:Manage catalog template revision resources.'
+                'update:Update a catalog template.'
+            )
+            _describe 'command' commands
+            ;;
+        'gcloud design-center spaces catalogs templates revisions')
+            local -a commands
+            commands=(
+                'create:Create a new catalog template revision.'
+                'delete:Delete a catalog template revision.'
+                'describe:Describe a catalog template revision.'
+                'list:List catalog template revisions.'
+            )
+            _describe 'command' commands
+            ;;
+        'gcloud design-center spaces shared-templates')
+            local -a commands
+            commands=(
+                'describe:Describe a shared template.'
+                'list:List shared templates.'
+                'revisions:Manage shared template revision resources.'
+            )
+            _describe 'command' commands
+            ;;
+        'gcloud design-center spaces shared-templates revisions')
+            local -a commands
+            commands=(
+                'describe:Describe a shared template revision.'
+                'list:List shared template revisions.'
+            )
+            _describe 'command' commands
+            ;;
         'gcloud developer-connect')
             local -a commands
             commands=(
@@ -6947,6 +7203,7 @@ _gcloud_dispatch() {
             local -a commands
             commands=(
                 'env-init:Print the commands required to export Spanner emulator'\''s env variables.'
+                'notices:Print third-party notices for the local Cloud Spanner emulator.'
                 'start:Start a local Cloud Spanner emulator.'
             )
             _describe 'command' commands
@@ -7368,6 +7625,7 @@ _gcloud_dispatch() {
         'gcloud firestore databases')
             local -a commands
             commands=(
+                'clone:Clone a Google Cloud Firestore database from another.'
                 'connection-string:Prints the mongo connection string for the given Firestore database.'
                 'create:Create a Google Cloud Firestore database via Firestore API.'
                 'delete:Delete a Google Cloud Firestore database.'
@@ -10275,6 +10533,7 @@ _gcloud_dispatch() {
                 'delete:Delete a multicast consumer association.'
                 'describe:Describe a multicast consumer association.'
                 'list:List multicast consumer associations.'
+                'update:Update a multicast consumer association.'
             )
             _describe 'command' commands
             ;;
@@ -10296,6 +10555,7 @@ _gcloud_dispatch() {
                 'delete:Delete a multicast domain group.'
                 'describe:Describe a multicast domain group.'
                 'list:List multicast domain groups.'
+                'update:Update a multicast domain group.'
             )
             _describe 'command' commands
             ;;
@@ -10306,6 +10566,7 @@ _gcloud_dispatch() {
                 'delete:Delete a multicast domain.'
                 'describe:Describe a multicast domain.'
                 'list:List multicast domains.'
+                'update:Update a multicast domain.'
             )
             _describe 'command' commands
             ;;
@@ -10327,6 +10588,7 @@ _gcloud_dispatch() {
                 'delete:Delete a multicast group producer activation.'
                 'describe:Describe a multicast group producer activation.'
                 'list:List multicast group producer activations.'
+                'update:Update a multicast group producer activation.'
             )
             _describe 'command' commands
             ;;
@@ -10359,6 +10621,7 @@ _gcloud_dispatch() {
                 'delete:Delete a multicast producer association.'
                 'describe:Describe a multicast producer associations.'
                 'list:List multicast producer associations.'
+                'update:Update a multicast producer association.'
             )
             _describe 'command' commands
             ;;
@@ -12041,6 +12304,7 @@ _gcloud_dispatch() {
             local -a commands
             commands=(
                 'authz-extensions:Manage Service Extensions '\''AuthzExtension'\'' resources.'
+                'lb-edge-extensions:Manage Service Extensions '\''LbEdgeExtension'\'' resources.'
                 'lb-route-extensions:Manage Service Extensions '\''LbRouteExtension'\'' resources.'
                 'lb-traffic-extensions:Manage Service Extensions '\''LbTrafficExtension'\'' resources.'
                 'wasm-plugin-versions:Interact with and manage Service Extensions '\''WasmPluginVersions'\''.'
@@ -12055,6 +12319,16 @@ _gcloud_dispatch() {
                 'describe:Describe an '\''AuthzExtension'\'' resource.'
                 'import:Import an '\''AuthzExtension'\'' resource.'
                 'list:List '\''AuthzExtension'\'' resources.'
+            )
+            _describe 'command' commands
+            ;;
+        'gcloud service-extensions lb-edge-extensions')
+            local -a commands
+            commands=(
+                'delete:Delete an '\''LbEdgeExtension'\'' resource.'
+                'describe:Describe an '\''LbEdgeExtension'\'' resource.'
+                'import:Import an '\''LbEdgeExtension'\'' resource.'
+                'list:List '\''LbEdgeExtension'\'' resources.'
             )
             _describe 'command' commands
             ;;
@@ -12501,6 +12775,7 @@ _gcloud_dispatch() {
                 'import:\(DEPRECATED\)  Imports data into a Cloud SQL instance from Google Cloud Storage.'
                 'list:Lists Cloud SQL instances in a given project.'
                 'patch:Updates the settings of a Cloud SQL instance.'
+                'point-in-time-restore:Performs a point in time restore for a Cloud SQL instance managed by Google Cloud Backup and Disaster Recovery \(DR\) Service.'
                 'pre-check-major-version-upgrade:Performs pre-checks for a major version upgrade of a Cloud SQL instance.'
                 'promote-replica:Promotes Cloud SQL read replica to a stand-alone instance.'
                 'reencrypt:Reencrypts a Cloud SQL CMEK instance.'
@@ -12604,6 +12879,7 @@ _gcloud_dispatch() {
                 'hash:Calculates hashes on local or cloud files.'
                 'hmac:Manage Cloud Storage service account HMAC keys.'
                 'insights:Manage Cloud Storage inventory reports.'
+                'intelligence-configs:Manage Cloud Storage Intelligence Configurations.'
                 'ls:List Cloud Storage buckets and objects.'
                 'managed-folders:Manage Cloud Storage managed folders.'
                 'mv:Moves or renames objects.'
@@ -12700,7 +12976,21 @@ _gcloud_dispatch() {
         'gcloud storage insights')
             local -a commands
             commands=(
+                'dataset-configs:Manage Cloud Storage Insights dataset configurations.'
                 'inventory-reports:Manage Cloud Storage inventory report configurations.'
+            )
+            _describe 'command' commands
+            ;;
+        'gcloud storage insights dataset-configs')
+            local -a commands
+            commands=(
+                'create:Create a new dataset config for Insights.'
+                'create-link:Create a link to a BigQuery instance.'
+                'delete:Delete dataset config for Insights.'
+                'delete-link:Delete a link to a BigQuery instance.'
+                'describe:Describe dataset config for Insights.'
+                'list:List returns all the Insights dataset configs for given location.'
+                'update:Updates a dataset config for Insights.'
             )
             _describe 'command' commands
             ;;
@@ -12721,6 +13011,16 @@ _gcloud_dispatch() {
             commands=(
                 'describe:Describe inventory reports detail.'
                 'list:List inventory report details.'
+            )
+            _describe 'command' commands
+            ;;
+        'gcloud storage intelligence-configs')
+            local -a commands
+            commands=(
+                'describe:Describes storage intelligence configuration.'
+                'disable:Disables storage intelligence.'
+                'enable:Enables storage intelligence.'
+                'update:Updates storage intelligence configuration.'
             )
             _describe 'command' commands
             ;;
