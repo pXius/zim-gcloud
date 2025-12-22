@@ -50,6 +50,7 @@ _gcloud_dispatch() {
                 'authz-toolkit:Manage Authorization Toolkit resources.'
                 'backup-dr:Manage Backup and DR resources.'
                 'batch:Manage Batch resources.'
+                'beyondcorp:Manage Beyondcorp resources.'
                 'bigtable:Manage your Cloud Bigtable storage.'
                 'billing:Manage billing accounts and associate them with projects.'
                 'bms:Manage Bare Metal Solution resources.'
@@ -998,6 +999,7 @@ _gcloud_dispatch() {
             local -a commands
             commands=(
                 'applications:Manage App Hub Applications.'
+                'boundary:Manage App Hub boundaries.'
                 'discovered-services:Manage App Hub Discovered Services.'
                 'discovered-workloads:Manage App Hub Discovered Workloads.'
                 'locations:Manage App Hub Locations.'
@@ -1042,6 +1044,14 @@ _gcloud_dispatch() {
                 'describe:Describe an Apphub application workload.'
                 'list:List Apphub application workloads.'
                 'update:Update an Apphub application workload.'
+            )
+            _describe 'command' commands
+            ;;
+        'gcloud apphub boundary')
+            local -a commands
+            commands=(
+                'describe:Show metadata for an App Hub boundary.'
+                'update:Update an App Hub boundary.'
             )
             _describe 'command' commands
             ;;
@@ -1104,6 +1114,7 @@ _gcloud_dispatch() {
                 'locations:Manage Artifact Registry resource locations.'
                 'operations:Manage Artifact Registry long-running operations.'
                 'packages:Manage Artifact Registry packages.'
+                'platform-logs:Manage Artifact Registry Platform Logs configurations.'
                 'print-settings:Print snippets to add to native tools settings files.'
                 'repositories:Manage Artifact Registry repositories.'
                 'rules:Manage Artifact Registry rules.'
@@ -1230,6 +1241,16 @@ _gcloud_dispatch() {
                 'describe:Describe an Artifact Registry package.'
                 'list:List Artifact Registry packages.'
                 'update:Update annotations on an Artifact Registry package.'
+            )
+            _describe 'command' commands
+            ;;
+        'gcloud artifacts platform-logs')
+            local -a commands
+            commands=(
+                'clear:Clear the Platform Logs configuration.'
+                'describe:Describe the current Platform Logs configuration.'
+                'disable:Disable the Platform Logs configuration.'
+                'enable:Enable the Platform Logs configuration.'
             )
             _describe 'command' commands
             ;;
@@ -1694,6 +1715,49 @@ _gcloud_dispatch() {
             commands=(
                 'describe:Show details of a task.'
                 'list:List tasks for a specified Batch job.'
+            )
+            _describe 'command' commands
+            ;;
+        'gcloud beyondcorp')
+            local -a commands
+            commands=(
+                'operations:Manage Operation resources.'
+                'security-gateways:Manage Security Gateway resources.'
+            )
+            _describe 'command' commands
+            ;;
+        'gcloud beyondcorp operations')
+            local -a commands
+            commands=(
+                'describe:Describe operations.'
+                'list:List operations.'
+            )
+            _describe 'command' commands
+            ;;
+        'gcloud beyondcorp security-gateways')
+            local -a commands
+            commands=(
+                'applications:Manage Application resources.'
+                'create:Create securityGateways.'
+                'delete:Delete securityGateways.'
+                'describe:Describe securityGateways.'
+                'get-iam-policy:Get the IAM policy for a security gateway.'
+                'list:List securityGateways.'
+                'set-iam-policy:Set the IAM policy for a security gateway.'
+                'update:Update securityGateways.'
+            )
+            _describe 'command' commands
+            ;;
+        'gcloud beyondcorp security-gateways applications')
+            local -a commands
+            commands=(
+                'create:Create applications.'
+                'delete:Delete applications.'
+                'describe:Describe applications.'
+                'get-iam-policy:Get the IAM policy for a security gateway application.'
+                'list:List applications.'
+                'set-iam-policy:Set the IAM policy for a security gateway application.'
+                'update:Update applications.'
             )
             _describe 'command' commands
             ;;
@@ -2527,6 +2591,7 @@ _gcloud_dispatch() {
             commands=(
                 'accelerator-types:Read Compute Engine accelerator types.'
                 'addresses:Read and manipulate Compute Engine addresses.'
+                'advice:Provides recommendation on optimal allocation of resources according to a flexible specifications.'
                 'backend-buckets:Read and manipulate backend buckets.'
                 'backend-services:List, create, and delete backend services.'
                 'commitments:Manage Compute Engine commitments.'
@@ -2621,6 +2686,13 @@ _gcloud_dispatch() {
                 'describe:Display detailed information about a reserved static address.'
                 'list:List addresses.'
                 'move:Move an address to another project.'
+            )
+            _describe 'command' commands
+            ;;
+        'gcloud compute advice')
+            local -a commands
+            commands=(
+                'calendar-mode:Recommends the optimal time window and zone for Future Reservations.'
             )
             _describe 'command' commands
             ;;
@@ -4415,6 +4487,9 @@ _gcloud_dispatch() {
                 'model-server-versions:Manage supported model server versions for GKE Inference Quickstart.'
                 'model-servers:Manage supported model servers for GKE Inference Quickstart.'
                 'models:Manage supported models for GKE Inference Quickstart.'
+                'serving-stack-versions:List supported serving stack versions for GKE Inference Quickstart.'
+                'serving-stacks:List supported serving stacks for GKE Inference Quickstart.'
+                'use-case:List supported use cases for GKE Inference Quickstart.'
             )
             _describe 'command' commands
             ;;
@@ -4450,6 +4525,27 @@ _gcloud_dispatch() {
             local -a commands
             commands=(
                 'list:List supported models.'
+            )
+            _describe 'command' commands
+            ;;
+        'gcloud container ai profiles serving-stack-versions')
+            local -a commands
+            commands=(
+                'list:List supported serving stack versions that were used to generate the inference profiles.'
+            )
+            _describe 'command' commands
+            ;;
+        'gcloud container ai profiles serving-stacks')
+            local -a commands
+            commands=(
+                'list:List supported serving stacks that were used to generate the inference profiles.'
+            )
+            _describe 'command' commands
+            ;;
+        'gcloud container ai profiles use-case')
+            local -a commands
+            commands=(
+                'list:List supported use cases that were used to generate the inference profiles.'
             )
             _describe 'command' commands
             ;;
@@ -7441,8 +7537,10 @@ _gcloud_dispatch() {
                 'delete:Delete a Filestore instance.'
                 'describe:Show metadata for a Filestore instance.'
                 'list:List Filestore instances.'
+                'pause-replica:Pause a Filestore replica instance.'
                 'promote-replica:Promote a Filestore standby replication instance.'
                 'restore:Restore a Filestore instance from a backup.'
+                'resume-replica:Resume a Filestore replica instance.'
                 'revert:Revert a Filestore instance.'
                 'snapshots:Create and manage Filestore snapshots.'
                 'update:Update a Filestore instance.'
@@ -8658,6 +8756,7 @@ _gcloud_dispatch() {
         'gcloud infra-manager')
             local -a commands
             commands=(
+                'automigrationconfig:Manage auto migration config resources.'
                 'deployments:Manage Deployment resources.'
                 'previews:Manage Preview resources.'
                 'resource-changes:Manage resource change resources.'
@@ -8665,6 +8764,15 @@ _gcloud_dispatch() {
                 'resources:List or describe resources under a Revision.'
                 'revisions:Manage Revision resources.'
                 'terraform-versions:Manage Terraform version resources.'
+            )
+            _describe 'command' commands
+            ;;
+        'gcloud infra-manager automigrationconfig')
+            local -a commands
+            commands=(
+                'describe:Describe an AutoMigrationConfig.'
+                'disable-auto-migration:Disable AutoMigrationConfig.'
+                'enable-auto-migration:Enable AutoMigrationConfig.'
             )
             _describe 'command' commands
             ;;
@@ -8754,8 +8862,10 @@ _gcloud_dispatch() {
                 'locations:View locations available for a project.'
                 'mac-sign:Sign a user input file using a MAC key version.'
                 'mac-verify:Verify a user signature file using a MAC key version.'
+                'operations:Commands for managing operations.'
                 'raw-decrypt:Decrypt a ciphertext file using a raw key.'
                 'raw-encrypt:Encrypt a plaintext file using a raw key.'
+                'single-tenant-hsm:Commands for managing single tenant HSM instances.'
             )
             _describe 'command' commands
             ;;
@@ -8877,6 +8987,35 @@ _gcloud_dispatch() {
             local -a commands
             commands=(
                 'list:List the project'\''s locations.'
+            )
+            _describe 'command' commands
+            ;;
+        'gcloud kms operations')
+            local -a commands
+            commands=(
+                'describe:View the details of an operation.'
+            )
+            _describe 'command' commands
+            ;;
+        'gcloud kms single-tenant-hsm')
+            local -a commands
+            commands=(
+                'create:Create a single tenant HSM instance.'
+                'describe:Get metadata for a single tenant HSM instance.'
+                'list:List single tenant HSM instances within a location.'
+                'proposal:Commands for managing single tenant HSM instance proposals.'
+            )
+            _describe 'command' commands
+            ;;
+        'gcloud kms single-tenant-hsm proposal')
+            local -a commands
+            commands=(
+                'approve:Approve a single tenant HSM instance proposal.'
+                'create:Create a single tenant HSM instance proposal.'
+                'delete:Delete a single tenant HSM instance proposal.'
+                'describe:Get metadata for a single tenant HSM instance proposal.'
+                'execute:Executes a single tenant HSM proposal.'
+                'list:List single tenant HSM instance proposals within a single tenant HSM instance.'
             )
             _describe 'command' commands
             ;;
@@ -9312,6 +9451,7 @@ _gcloud_dispatch() {
             commands=(
                 'apis:Inspect the APIs registered in gcloud.'
                 'cache:Cloud SDK persistent cache commands.'
+                'check-import:Check if modules are importable.'
                 'cli-trees:CLI trees manager.'
                 'daemon:\(DEBUG MODE\) Precomputes gcloud CLI and runs a single-request server.'
                 'debug:Run an interactive debug console with the Cloud SDK libraries loaded.'
@@ -9666,6 +9806,7 @@ _gcloud_dispatch() {
             local -a commands
             commands=(
                 'dashboards:Manage Cloud Monitoring dashboards.'
+                'policies:Manage Cloud Monitoring alerting policies.'
                 'snoozes:Manage Cloud Monitoring snoozes.'
                 'uptime:Manage Cloud Monitoring uptime checks and synthetic monitors.'
             )
@@ -9679,6 +9820,29 @@ _gcloud_dispatch() {
                 'describe:Describe a Cloud Monitoring dashboard.'
                 'list:List Cloud Monitoring dashboards.'
                 'update:Update a Cloud Monitoring dashboard.'
+            )
+            _describe 'command' commands
+            ;;
+        'gcloud monitoring policies')
+            local -a commands
+            commands=(
+                'conditions:Manage Cloud Monitoring alerting policy conditions.'
+                'create:Create a new alerting policy.'
+                'delete:Delete a Cloud Monitoring alerting policy.'
+                'describe:Describe an  alerting policy.'
+                'list:List alerting policies.'
+                'migrate:Migrate a Prometheus configuration file to Cloud Monitoring.'
+                'update:Updates an alerting policy.'
+            )
+            _describe 'command' commands
+            ;;
+        'gcloud monitoring policies conditions')
+            local -a commands
+            commands=(
+                'create:Create a condition in an alerting policy.'
+                'delete:Delete a condition in an alerting policy.'
+                'describe:Describe a condition in a Cloud Monitoring alerting policy.'
+                'update:Update a condition in an alerting policy.'
             )
             _describe 'command' commands
             ;;
@@ -10136,6 +10300,7 @@ _gcloud_dispatch() {
                 'authz-policies:Manage Network Security '\''AuthzPolicy'\'' resources.'
                 'backend-authentication-configs:Manage Network Security BackendAuthenticationConfigs.'
                 'client-tls-policies:Manage Network Security ClientTlsPolicies.'
+                'dns-threat-detectors:Manage Dns Threat Detector resources.'
                 'firewall-endpoint-associations:Create and manage Firewall Plus endpoint associations.'
                 'firewall-endpoints:Create and manage Firewall Plus endpoints.'
                 'gateway-security-policies:Manage Network Security Gateway Security Policies.'
@@ -10210,6 +10375,17 @@ _gcloud_dispatch() {
                 'export:Export ClientTlsPolicy.'
                 'import:Import ClientTlsPolicy.'
                 'list:List ClientTlsPolicies.'
+            )
+            _describe 'command' commands
+            ;;
+        'gcloud network-security dns-threat-detectors')
+            local -a commands
+            commands=(
+                'create:Create a DnsThreatDetector resource.'
+                'delete:Delete a DnsThreatDetector resource.'
+                'describe:Describe a DnsThreatDetector resource.'
+                'list:List DnsThreatDetector resources.'
+                'update:Update a DnsThreatDetector resource.'
             )
             _describe 'command' commands
             ;;
@@ -13248,6 +13424,7 @@ _gcloud_dispatch() {
             local -a commands
             commands=(
                 'announcements:Manage announcements in Google Cloud VMware Engine.'
+                'datastores:Manage VMware Engine datastores in Google Cloud VMware Engine.'
                 'dns-bind-permission:Manage DNS binding permission in Google Cloud VMware Engine.'
                 'locations:List locations in Google Cloud VMware Engine.'
                 'network-peerings:Manage VMware Engine VPC peering using Google Cloud VMware Engine.'
@@ -13264,6 +13441,17 @@ _gcloud_dispatch() {
             local -a commands
             commands=(
                 'list:List announcements in a Google Cloud VMware Engine.'
+            )
+            _describe 'command' commands
+            ;;
+        'gcloud vmware datastores')
+            local -a commands
+            commands=(
+                'create:Create a datastore.'
+                'delete:Delete a datastore.'
+                'describe:Describe a datastore.'
+                'list:List datastores.'
+                'update:Update a datastore.'
             )
             _describe 'command' commands
             ;;
@@ -13383,7 +13571,9 @@ _gcloud_dispatch() {
                 'delete:Delete a Google Cloud VMware Engine cluster.'
                 'describe:Describe a Google Cloud VMware Engine cluster.'
                 'list:List clusters in a Google Cloud VMware Engine private cloud.'
+                'mount-datastore:Mount a datastore to a Google Cloud VMware Engine cluster.'
                 'nodes:Manage nodes in Google Cloud VMware Engine.'
+                'unmount-datastore:Unmount a datastore from a Google Cloud VMware Engine cluster.'
                 'update:Update a Google Cloud VMware Engine cluster.'
             )
             _describe 'command' commands
