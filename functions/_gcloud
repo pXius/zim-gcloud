@@ -1575,6 +1575,7 @@ _gcloud_dispatch() {
                 'locations:Manage Backup and DR locations.'
                 'management-servers:Manage Backup and DR management server.'
                 'operations:Manage Backup and DR operations.'
+                'resource-backup-config:Show protection summary for resources in a particular location and project.'
                 'service-config:Manage Backup and DR Service configuration.'
             )
             _describe 'command' commands
@@ -1681,6 +1682,13 @@ _gcloud_dispatch() {
             commands=(
                 'describe:Describe an operation.'
                 'list:List all operations.'
+            )
+            _describe 'command' commands
+            ;;
+        'gcloud backup-dr resource-backup-config')
+            local -a commands
+            commands=(
+                'list:Show backup configuration metadata associated with specified resources in a particular location for the project.'
             )
             _describe 'command' commands
             ;;
@@ -2464,6 +2472,7 @@ _gcloud_dispatch() {
                 'repositories:Manage additional component repositories for Trusted Tester programs.'
                 'restore:\(DEPRECATED\)  Restore the Google Cloud CLI installation to its state before a reinstall.'
                 'update:Update all of your installed components to the latest version.'
+                'update-macos-python:Updates managed Python installation on macOS.'
             )
             _describe 'command' commands
             ;;
@@ -3781,7 +3790,7 @@ _gcloud_dispatch() {
                 'add-metadata:Add or update project-wide metadata.'
                 'describe:Describe the Compute Engine project resource.'
                 'remove-metadata:Remove project-wide metadata entries.'
-                'set-usage-bucket:Set usage reporting bucket for a project.'
+                'set-usage-bucket:\(DEPRECATED\)  Set usage reporting bucket for a project.'
                 'update:Update a Compute Engine project resource.'
             )
             _describe 'command' commands
@@ -6656,6 +6665,7 @@ _gcloud_dispatch() {
                 'delete:Delete operations.'
                 'describe:Describe operations.'
                 'list:List operations.'
+                'wait:Wait for an operation to complete.'
             )
             _describe 'command' commands
             ;;
@@ -6736,7 +6746,7 @@ _gcloud_dispatch() {
                 'generate:Generate IaC for an application.'
                 'import-iac:Import Infrastructure as Code \(IaC\) for an Application.'
                 'list:List applications.'
-                'preview:Preview an application.'
+                'preview:Preview a Design Center application.'
                 'update:Update an application.'
             )
             _describe 'command' commands
