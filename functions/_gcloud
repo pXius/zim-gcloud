@@ -75,6 +75,7 @@ _gcloud_dispatch() {
                 'dataproc-gdc:Manage Dataproc Gdc resources.'
                 'datastore:Manage your Cloud Datastore resources.'
                 'datastream:Manage Cloud Datastream resources.'
+                'declarative-pipeline:Manage Declarative Pipeline resources.'
                 'deploy:Create and manage Cloud Deploy resources.'
                 'deployment-manager:Manage deployments of cloud resources.'
                 'design-center:Manage Application Design Center resources.'
@@ -3856,6 +3857,7 @@ _gcloud_dispatch() {
                 'perform-maintenance:Perform maintenance on a reservation, only applicable to reservations with reservation blocks.'
                 'remove-iam-policy-binding:Remove IAM policy binding from a Compute Engine reservation.'
                 'set-iam-policy:Set the IAM policy for a Compute Engine reservation.'
+                'slots:Manage Compute Engine reservation slots.'
                 'sub-blocks:Manage Compute Engine reservation sub blocks.'
                 'update:Update Compute Engine reservations.'
             )
@@ -3867,6 +3869,14 @@ _gcloud_dispatch() {
                 'describe:Describe a Compute Engine reservation block.'
                 'list:List Compute Engine reservation blocks.'
                 'perform-maintenance:Perform maintenance on a reservation block within a reservation.'
+            )
+            _describe 'command' commands
+            ;;
+        'gcloud compute reservations slots')
+            local -a commands
+            commands=(
+                'describe:Describe a Compute Engine reservation slot.'
+                'list:List Compute Engine reservation slots.'
             )
             _describe 'command' commands
             ;;
@@ -6456,6 +6466,13 @@ _gcloud_dispatch() {
             )
             _describe 'command' commands
             ;;
+        'gcloud declarative-pipeline')
+            local -a commands
+            commands=(
+                'deploy:Deploy a declarative pipeline.'
+            )
+            _describe 'command' commands
+            ;;
         'gcloud deploy')
             local -a commands
             commands=(
@@ -8194,6 +8211,7 @@ _gcloud_dispatch() {
                 'policies:Manage IAM deny policies.'
                 'policy-bindings:Manage policy bindings.'
                 'principal-access-boundary-policies:Manage principal access boundary policies.'
+                'regional-access-boundary-policies:Manage Regional Access Boundary Policy resources.'
                 'roles:Create and manipulate roles.'
                 'service-accounts:Create and manipulate service accounts.'
                 'simulator:Understand how an IAM policy change could impact access before deploying the change.'
@@ -8258,6 +8276,18 @@ _gcloud_dispatch() {
                 'list:List PrincipalAccessBoundaryPolicy instances.'
                 'search-policy-bindings:Search Principal Access Boundary Policy Bindings.'
                 'update:Update PrincipalAccessBoundaryPolicy instance.'
+            )
+            _describe 'command' commands
+            ;;
+        'gcloud iam regional-access-boundary-policies')
+            local -a commands
+            commands=(
+                'create:Create a Regional Access Boundary policy.'
+                'delete:Delete a Regional Access Boundary policy.'
+                'describe:Get a Regional Access Boundary policy.'
+                'list:List Regional Access Boundary policies.'
+                'search-policy-bindings:Search Regional Access Boundary policy bindings.'
+                'update:Update a Regional Access Boundary policy.'
             )
             _describe 'command' commands
             ;;
@@ -8413,6 +8443,7 @@ _gcloud_dispatch() {
             commands=(
                 'delete:Delete a workforce pool subject.'
                 'operations:Manage IAM workforce pool subject long-running operations.'
+                'revoke-sessions:Revoke all sessions for a workforce pool subject.'
                 'undelete:Undelete a workforce pool subject.'
             )
             _describe 'command' commands
@@ -9043,6 +9074,7 @@ _gcloud_dispatch() {
                 'read:Read log entries.'
                 'redact:Redact log entries.'
                 'resource-descriptors:Get information about resource descriptors.'
+                'saved-queries:Manage Cloud Logging saved queries.'
                 'scopes:Manages Cloud Logging log scopes.'
                 'settings:Manages the org settings for the Cloud Logging Logs Router.'
                 'sinks:Manages sinks used to route logs to storage or export destinations.'
@@ -9122,6 +9154,16 @@ _gcloud_dispatch() {
             local -a commands
             commands=(
                 'list:List all available resource descriptors.'
+            )
+            _describe 'command' commands
+            ;;
+        'gcloud logging saved-queries')
+            local -a commands
+            commands=(
+                'create:Create a Logging saved query.'
+                'delete:Delete a Logging saved query.'
+                'get:Get a Logging saved query.'
+                'list:List Logging saved queries.'
             )
             _describe 'command' commands
             ;;
@@ -9998,6 +10040,7 @@ _gcloud_dispatch() {
                 'create:Create a Cloud NetApp Volume.'
                 'delete:Delete a Cloud NetApp Volume.'
                 'describe:Show metadata for a Cloud NetApp Volume.'
+                'establish-peering:Establish peering for Cache Volumes.'
                 'list:List Cloud NetApp Volumes.'
                 'quota-rules:Create and manage Cloud NetApp Volume QuotaRules.'
                 'replications:Create and manage Cloud NetApp Volume Replications.'
@@ -10551,7 +10594,7 @@ _gcloud_dispatch() {
                 'create:Create a new Security Profile Group.'
                 'delete:Delete a Security Profile Group.'
                 'describe:Describe a Security Profile Group.'
-                'list:List Security Profile groups.'
+                'list:List Security Profile Groups.'
                 'update:Update a Security Profile Group.'
             )
             _describe 'command' commands
@@ -10569,8 +10612,8 @@ _gcloud_dispatch() {
             local -a commands
             commands=(
                 'create:Create a new Custom Intercept Profile.'
-                'delete:Delete a Security Profile.'
-                'describe:Describe a Custom InterceptSecurity Profile.'
+                'delete:Delete a Custom Intercept Profile.'
+                'describe:Describe a Custom Intercept Profile.'
                 'list:List Custom Intercept Security Profiles.'
                 'update:Updates a Custom Intercept Profile.'
             )
@@ -10580,8 +10623,8 @@ _gcloud_dispatch() {
             local -a commands
             commands=(
                 'create:Create a new Custom Mirroring Profile.'
-                'delete:Delete a Security Profile.'
-                'describe:Describe a Custom MirroringSecurity Profile.'
+                'delete:Delete a Custom Mirroring Profile.'
+                'describe:Describe a Custom Mirroring Profile.'
                 'list:List Custom Mirroring Security Profiles.'
                 'update:Updates a Custom Mirroring Profile.'
             )
@@ -10592,7 +10635,7 @@ _gcloud_dispatch() {
             commands=(
                 'add-override:Add overrides to Threat Prevention Profile.'
                 'create:Create a new Threat Prevention Profile.'
-                'delete:Delete a Security Profile.'
+                'delete:Delete a Threat Prevention Profile.'
                 'delete-override:Delete overrides of Threat Prevention Profile.'
                 'list:List Threat Prevention Security Profiles.'
                 'list-overrides:List overrides of Threat Prevention Profile.'
