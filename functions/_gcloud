@@ -9072,6 +9072,7 @@ _gcloud_dispatch() {
                 'metrics:Manages logs-based metrics.'
                 'operations:Manage long running operations.'
                 'read:Read log entries.'
+                'recent-queries:Manage Cloud Logging recent queries.'
                 'redact:Redact log entries.'
                 'resource-descriptors:Get information about resource descriptors.'
                 'saved-queries:Manage Cloud Logging saved queries.'
@@ -9147,6 +9148,13 @@ _gcloud_dispatch() {
                 'cancel:Cancel a long running operation.'
                 'describe:Display the information about a long running operation.'
                 'list:List long running operations.'
+            )
+            _describe 'command' commands
+            ;;
+        'gcloud logging recent-queries')
+            local -a commands
+            commands=(
+                'list:List Logging recent queries.'
             )
             _describe 'command' commands
             ;;
@@ -13777,7 +13785,19 @@ _gcloud_dispatch() {
         'gcloud workbench')
             local -a commands
             commands=(
+                'executions:Workbench executions command group.'
                 'instances:Workbench Instances command group.'
+                'schedules:Workbench schedules command group.'
+            )
+            _describe 'command' commands
+            ;;
+        'gcloud workbench executions')
+            local -a commands
+            commands=(
+                'create:Create a Workbench execution.'
+                'delete:Delete an execution.'
+                'describe:Describe an execution.'
+                'list:List your notebook execution jobs.'
             )
             _describe 'command' commands
             ;;
@@ -13803,6 +13823,19 @@ _gcloud_dispatch() {
                 'stop:Stops a workbench instance.'
                 'update:Updates a workbench instance.'
                 'upgrade:Upgrades a workbench instance.'
+            )
+            _describe 'command' commands
+            ;;
+        'gcloud workbench schedules')
+            local -a commands
+            commands=(
+                'create:Create a schedule.'
+                'delete:Delete a schedule.'
+                'describe:Describe a schedule.'
+                'list:List your Workbench notebook execution schedules.'
+                'pause:Pause a schedule.'
+                'resume:Resume a schedule.'
+                'update:Update a schedule.'
             )
             _describe 'command' commands
             ;;
