@@ -40,6 +40,7 @@ _gcloud_dispatch() {
                 'anthos:Anthos command Group.'
                 'api-gateway:Manage Cloud API Gateway resources.'
                 'apigee:Manage Apigee resources.'
+                'apihub:Manage Apihub resources.'
                 'app:Manage your App Engine deployments.'
                 'apphub:Manage App Hub resources.'
                 'artifacts:Manage Artifact Registry resources.'
@@ -75,7 +76,6 @@ _gcloud_dispatch() {
                 'dataproc-gdc:Manage Dataproc Gdc resources.'
                 'datastore:Manage your Cloud Datastore resources.'
                 'datastream:Manage Cloud Datastream resources.'
-                'declarative-pipeline:Manage Declarative Pipeline resources.'
                 'deploy:Create and manage Cloud Deploy resources.'
                 'deployment-manager:Manage deployments of cloud resources.'
                 'design-center:Manage Application Design Center resources.'
@@ -161,6 +161,7 @@ _gcloud_dispatch() {
                 'transcoder:Manage Transcoder jobs and job templates.'
                 'transfer:Manage Transfer Service jobs, operations, and agents.'
                 'unlock:Unlock secrets and surprises coming soon to Google Cloud.'
+                'vector-search:Manage Vector Search data objects.'
                 'version:Print version information for Google Cloud CLI components.'
                 'vmware:Manage Google Cloud VMware Engine resources.'
                 'workbench:Workbench Command Group.'
@@ -214,6 +215,7 @@ _gcloud_dispatch() {
                 'levels:Manage Access Context Manager levels.'
                 'perimeters:Manage Access Context Manager service perimeters.'
                 'policies:Manage Access Context Manager policies.'
+                'supported-permissions:Retrieve VPC Service Controls Supported Permissions.'
                 'supported-services:Retrieve VPC Service Controls Supported Services.'
             )
             _describe 'command' commands
@@ -299,6 +301,14 @@ _gcloud_dispatch() {
                 'remove-iam-policy-binding:Remove IAM policy binding for an access policy.'
                 'set-iam-policy:Set IAM policy for an access policy.'
                 'update:Update an existing access policy.'
+            )
+            _describe 'command' commands
+            ;;
+        'gcloud access-context-manager supported-permissions')
+            local -a commands
+            commands=(
+                'describe:Describes which permissions in a provided role are supported by VPC Service Controls.'
+                'list:Lists all VPC Service Controls supported permissions.'
             )
             _describe 'command' commands
             ;;
@@ -870,6 +880,221 @@ _gcloud_dispatch() {
             )
             _describe 'command' commands
             ;;
+        'gcloud apihub')
+            local -a commands
+            commands=(
+                'addons:Manage Addon resources.'
+                'api-hub-instances:Manage Api Hub Instance resources.'
+                'apis:Manage Api resources.'
+                'attributes:Manage Attribute resources.'
+                'curations:Manage Curation resources.'
+                'dependencies:Manage Dependency resources.'
+                'deployments:Manage Deployment resources.'
+                'discovered-api-observations:Manage Discovered Api Observation resources.'
+                'external-apis:Manage External Api resources.'
+                'host-project-registrations:Manage Host Project Registration resources.'
+                'operations:Manage Operation resources.'
+                'plugins:Manage Plugin resources.'
+                'runtime-project-attachments:Manage Runtime Project Attachment resources.'
+            )
+            _describe 'command' commands
+            ;;
+        'gcloud apihub addons')
+            local -a commands
+            commands=(
+                'describe:Describe an Addon.'
+                'list:List Addons.'
+                'manage-config:Manage the Config of an Addon.'
+            )
+            _describe 'command' commands
+            ;;
+        'gcloud apihub api-hub-instances')
+            local -a commands
+            commands=(
+                'create:Create an Api Hub Instance.'
+                'delete:Delete an Api Hub Instance.'
+                'describe:Describe an Api Hub Instance.'
+                'lookup:lookup apiHubInstances.'
+            )
+            _describe 'command' commands
+            ;;
+        'gcloud apihub apis')
+            local -a commands
+            commands=(
+                'create:Create apis.'
+                'delete:Delete an Api.'
+                'describe:Describe an Api.'
+                'list:List Apis.'
+                'update:Update apis.'
+                'versions:Manage Version resources.'
+            )
+            _describe 'command' commands
+            ;;
+        'gcloud apihub apis versions')
+            local -a commands
+            commands=(
+                'create:Create a Version.'
+                'delete:Delete a Version.'
+                'describe:Describe a Version.'
+                'list:List Versions.'
+                'operations:Manage Api Operation resources.'
+                'specs:Manage Spec resources.'
+                'update:Update versions.'
+            )
+            _describe 'command' commands
+            ;;
+        'gcloud apihub apis versions operations')
+            local -a commands
+            commands=(
+                'create:Create apiOperations.'
+                'delete:Delete apiOperations.'
+                'describe:Describe apiOperations.'
+                'list:List apiOperations.'
+                'update:Update apiOperations.'
+            )
+            _describe 'command' commands
+            ;;
+        'gcloud apihub apis versions specs')
+            local -a commands
+            commands=(
+                'create:Create a Spec.'
+                'delete:Delete a Spec.'
+                'describe:Describe a Spec.'
+                'get-contents:Get the contents of a spec.'
+                'lint:Lint a Spec.'
+                'list:List Specs.'
+                'update:Update specs.'
+            )
+            _describe 'command' commands
+            ;;
+        'gcloud apihub attributes')
+            local -a commands
+            commands=(
+                'create:Create an Attribute.'
+                'delete:Delete an Attribute.'
+                'describe:Describe an Attribute.'
+                'list:List Attributes.'
+                'update:Update an Attribute.'
+            )
+            _describe 'command' commands
+            ;;
+        'gcloud apihub curations')
+            local -a commands
+            commands=(
+                'create:Create a Curation.'
+                'delete:Delete a Curation.'
+                'describe:Describe a Curation.'
+                'list:List Curations.'
+                'update:Update a Curation.'
+            )
+            _describe 'command' commands
+            ;;
+        'gcloud apihub dependencies')
+            local -a commands
+            commands=(
+                'create:Create a Dependency.'
+                'delete:Delete a Dependency.'
+                'describe:Describe a Dependency.'
+                'list:List Dependencies.'
+                'update:Update a Dependency.'
+            )
+            _describe 'command' commands
+            ;;
+        'gcloud apihub deployments')
+            local -a commands
+            commands=(
+                'create:Create a Deployment.'
+                'delete:Delete a Deployment.'
+                'describe:Describe a Deployment.'
+                'list:List Deployments.'
+                'update:Update deployments.'
+            )
+            _describe 'command' commands
+            ;;
+        'gcloud apihub discovered-api-observations')
+            local -a commands
+            commands=(
+                'describe:Describe a Discovered Api Observation.'
+                'discovered-api-operations:Manage Discovered Api Operation resources.'
+                'list:List Discovered Api Observations.'
+            )
+            _describe 'command' commands
+            ;;
+        'gcloud apihub discovered-api-observations discovered-api-operations')
+            local -a commands
+            commands=(
+                'describe:Describe a Discovered Api Operation.'
+                'list:List Discovered Api Operations.'
+            )
+            _describe 'command' commands
+            ;;
+        'gcloud apihub external-apis')
+            local -a commands
+            commands=(
+                'create:Create an External Api.'
+                'delete:Delete an External Api.'
+                'describe:Describe an External Api.'
+                'list:List External Apis.'
+                'update:Update an External Api.'
+            )
+            _describe 'command' commands
+            ;;
+        'gcloud apihub host-project-registrations')
+            local -a commands
+            commands=(
+                'create:Create a Host Project Registration.'
+                'describe:Describe a Host Project Registration.'
+                'list:List Host Project Registrations.'
+            )
+            _describe 'command' commands
+            ;;
+        'gcloud apihub operations')
+            local -a commands
+            commands=(
+                'cancel:Cancel operations.'
+                'delete:Delete operations.'
+                'describe:Describe operations.'
+                'list:List operations.'
+                'wait:Wait operations.'
+            )
+            _describe 'command' commands
+            ;;
+        'gcloud apihub plugins')
+            local -a commands
+            commands=(
+                'create:Create a Plugin.'
+                'delete:Delete a Plugin.'
+                'describe:Describe a Plugin.'
+                'disable:Disable a Plugin.'
+                'enable:Enable a Plugin.'
+                'instances:Manage Plugin Instance resources.'
+                'list:List Plugins.'
+            )
+            _describe 'command' commands
+            ;;
+        'gcloud apihub plugins instances')
+            local -a commands
+            commands=(
+                'create:Create a Plugin Instance.'
+                'delete:Delete a Plugin Instance.'
+                'describe:Describe a Plugin Instance.'
+                'list:List Plugin Instances.'
+                'manage-source-data:manage pluginInstances.'
+                'update:Update a Plugin Instance.'
+            )
+            _describe 'command' commands
+            ;;
+        'gcloud apihub runtime-project-attachments')
+            local -a commands
+            commands=(
+                'create:Create a Runtime Project Attachment.'
+                'delete:Delete a Runtime Project Attachment.'
+                'describe:Describe a Runtime Project Attachment.'
+                'list:List Runtime Project Attachments.'
+                'lookup:Lookup a runtime project attachment.'
+            )
+            _describe 'command' commands
+            ;;
         'gcloud app')
             local -a commands
             commands=(
@@ -1115,8 +1340,8 @@ _gcloud_dispatch() {
                 'locations:Manage Artifact Registry resource locations.'
                 'operations:Manage Artifact Registry long-running operations.'
                 'packages:Manage Artifact Registry packages.'
-                'platform-logs:Manage Artifact Registry Platform Logs configurations.'
                 'print-settings:Print snippets to add to native tools settings files.'
+                'projects:Manage Artifact Registry project-level configurations for a specific location.'
                 'repositories:Manage Artifact Registry repositories.'
                 'rules:Manage Artifact Registry rules.'
                 'sbom:Manage Artifact SBOMs.'
@@ -1231,6 +1456,7 @@ _gcloud_dispatch() {
         'gcloud artifacts operations')
             local -a commands
             commands=(
+                'cancel:Cancel an Artifact Registry operation.'
                 'describe:Describe an Artifact Registry operation.'
             )
             _describe 'command' commands
@@ -1245,16 +1471,6 @@ _gcloud_dispatch() {
             )
             _describe 'command' commands
             ;;
-        'gcloud artifacts platform-logs')
-            local -a commands
-            commands=(
-                'clear:Clear the Platform Logs configuration.'
-                'describe:Describe the current Platform Logs configuration.'
-                'disable:Disable the Platform Logs configuration.'
-                'enable:Enable the Platform Logs configuration.'
-            )
-            _describe 'command' commands
-            ;;
         'gcloud artifacts print-settings')
             local -a commands
             commands=(
@@ -1262,6 +1478,14 @@ _gcloud_dispatch() {
                 'mvn:Print a snippet to add a Maven repository to the pom.xml file.'
                 'npm:Print credential settings to add to the .npmrc file.'
                 'python:Print credential settings to add to the .pypirc and pip.conf files.'
+            )
+            _describe 'command' commands
+            ;;
+        'gcloud artifacts projects')
+            local -a commands
+            commands=(
+                'describe:Describe project configuration.'
+                'update:Update project configuration.'
             )
             _describe 'command' commands
             ;;
@@ -2605,6 +2829,7 @@ _gcloud_dispatch() {
                 'backend-buckets:Read and manipulate backend buckets.'
                 'backend-services:List, create, and delete backend services.'
                 'commitments:Manage Compute Engine commitments.'
+                'composite-health-checks:Manage composite health checks.'
                 'config-ssh:Populate SSH config files with Host entries from each instance.'
                 'connect-to-serial-port:Connect to the serial port of an instance.'
                 'copy-files:Copy files to and from Google Compute Engine virtual machines via scp.'
@@ -2616,7 +2841,9 @@ _gcloud_dispatch() {
                 'firewall-rules:List, create, update, and delete Compute Engine firewall rules.'
                 'forwarding-rules:Read and manipulate traffic forwarding rules to network load balancers.'
                 'future-reservations:Manage Compute Engine future reservations.'
+                'health-aggregation-policies:Manage health aggregation policies.'
                 'health-checks:Read and manipulate health checks for load balanced instances.'
+                'health-sources:Manage health sources.'
                 'http-health-checks:Read and manipulate HTTP health checks for load balanced instances.'
                 'https-health-checks:Read and manipulate HTTPS health checks for load balanced instances.'
                 'images:List, create, and delete Compute Engine images.'
@@ -2761,6 +2988,17 @@ _gcloud_dispatch() {
             )
             _describe 'command' commands
             ;;
+        'gcloud compute composite-health-checks')
+            local -a commands
+            commands=(
+                'create:Create a composite health check.'
+                'delete:Delete a composite health check.'
+                'describe:Describe a composite health check.'
+                'list:List composite health checks.'
+                'update:Update a composite health check.'
+            )
+            _describe 'command' commands
+            ;;
         'gcloud compute diagnose')
             local -a commands
             commands=(
@@ -2896,6 +3134,17 @@ _gcloud_dispatch() {
             )
             _describe 'command' commands
             ;;
+        'gcloud compute health-aggregation-policies')
+            local -a commands
+            commands=(
+                'create:Create a health aggregation policy.'
+                'delete:Delete a health aggregation policy.'
+                'describe:Describe a health aggregation policy.'
+                'list:List health aggregation policies.'
+                'update:Update a health aggregation policy.'
+            )
+            _describe 'command' commands
+            ;;
         'gcloud compute health-checks')
             local -a commands
             commands=(
@@ -2930,6 +3179,17 @@ _gcloud_dispatch() {
                 'https:Update a HTTPS health check.'
                 'ssl:Update a SSL health check.'
                 'tcp:Update a TCP health check.'
+            )
+            _describe 'command' commands
+            ;;
+        'gcloud compute health-sources')
+            local -a commands
+            commands=(
+                'create:Create a health source.'
+                'delete:Delete a health source.'
+                'describe:Describe a health source.'
+                'list:List health sources.'
+                'update:Update a health source.'
             )
             _describe 'command' commands
             ;;
@@ -3791,7 +4051,7 @@ _gcloud_dispatch() {
                 'add-metadata:Add or update project-wide metadata.'
                 'describe:Describe the Compute Engine project resource.'
                 'remove-metadata:Remove project-wide metadata entries.'
-                'set-usage-bucket:\(DEPRECATED\)  Set usage reporting bucket for a project.'
+                'set-usage-bucket:\(REMOVED\)  Set usage reporting bucket for a project.'
                 'update:Update a Compute Engine project resource.'
             )
             _describe 'command' commands
@@ -4855,6 +5115,7 @@ _gcloud_dispatch() {
                 'rbacrolebindingactuation:Manage RbacRoleBinding Actuation.'
                 'scopes:Manage scopes of all your GKE fleets.'
                 'update:Update a fleet.'
+                'workload-identity:Manage Workload Identity Feature.'
             )
             _describe 'command' commands
             ;;
@@ -5142,6 +5403,24 @@ _gcloud_dispatch() {
             )
             _describe 'command' commands
             ;;
+        'gcloud container fleet workload-identity')
+            local -a commands
+            commands=(
+                'describe:Describe the status of Workload Identity Feature resource.'
+                'disable:Disable Workload Identity Feature.'
+                'enable:Enable Workload Identity Feature.'
+                'scope-tenancy-pool:Manage Workload Identity Feature scope tenancy pool.'
+            )
+            _describe 'command' commands
+            ;;
+        'gcloud container fleet workload-identity scope-tenancy-pool')
+            local -a commands
+            commands=(
+                'set:Set Scope Tenancy Pool.'
+                'unset:Unset Scope Tenancy Pool.'
+            )
+            _describe 'command' commands
+            ;;
         'gcloud container hub')
             local -a commands
             commands=(
@@ -5166,6 +5445,7 @@ _gcloud_dispatch() {
                 'rbacrolebindingactuation:Manage RbacRoleBinding Actuation.'
                 'scopes:Manage scopes of all your GKE fleets.'
                 'update:Update a fleet.'
+                'workload-identity:Manage Workload Identity Feature.'
             )
             _describe 'command' commands
             ;;
@@ -5453,6 +5733,24 @@ _gcloud_dispatch() {
             )
             _describe 'command' commands
             ;;
+        'gcloud container hub workload-identity')
+            local -a commands
+            commands=(
+                'describe:Describe the status of Workload Identity Feature resource.'
+                'disable:Disable Workload Identity Feature.'
+                'enable:Enable Workload Identity Feature.'
+                'scope-tenancy-pool:Manage Workload Identity Feature scope tenancy pool.'
+            )
+            _describe 'command' commands
+            ;;
+        'gcloud container hub workload-identity scope-tenancy-pool')
+            local -a commands
+            commands=(
+                'set:Set Scope Tenancy Pool.'
+                'unset:Unset Scope Tenancy Pool.'
+            )
+            _describe 'command' commands
+            ;;
         'gcloud container images')
             local -a commands
             commands=(
@@ -5682,6 +5980,7 @@ _gcloud_dispatch() {
                 'create:Create Database Migration Service connection profiles.'
                 'delete:Delete a Database Migration Service connection profile.'
                 'describe:Show details about a Database Migration Service connection profile.'
+                'fetch-static-ips:List IPs used for static IP connectivity method.'
                 'list:List Database Migration Service connection profiles.'
                 'test:Test a Database Migration Service connection profile.'
                 'update:Update a Database Migration Service connection profile.'
@@ -5840,6 +6139,7 @@ _gcloud_dispatch() {
                 'aspect-types:Manage Dataplex Aspect Types.'
                 'assets:Manage Dataplex Asset resources.'
                 'content:Manage Dataplex Content.'
+                'context:Manage Dataplex Context.'
                 'datascans:Manage Dataplex Datascan.'
                 'encryption-config:Manage Dataplex encryption configs.'
                 'entries:Manage Dataplex Catalog Entries resources.'
@@ -5904,6 +6204,13 @@ _gcloud_dispatch() {
                 'remove-iam-policy-binding:Removes IAM policy binding from a Dataplex Content.'
                 'set-iam-policy:Set the IAM policy to a Dataplex Content as defined in a JSON or YAML file.'
                 'update:Update a Dataplex Content Resource with the given configurations.'
+            )
+            _describe 'command' commands
+            ;;
+        'gcloud dataplex context')
+            local -a commands
+            commands=(
+                'lookup:Looks up LLM context for data assets.'
             )
             _describe 'command' commands
             ;;
@@ -6466,13 +6773,6 @@ _gcloud_dispatch() {
             )
             _describe 'command' commands
             ;;
-        'gcloud declarative-pipeline')
-            local -a commands
-            commands=(
-                'deploy:Deploy a declarative pipeline.'
-            )
-            _describe 'command' commands
-            ;;
         'gcloud deploy')
             local -a commands
             commands=(
@@ -6749,6 +7049,7 @@ _gcloud_dispatch() {
             commands=(
                 'delete:Delete an application template revision.'
                 'describe:Describe an application template revision.'
+                'generate:Generate IaC for an application template revision.'
                 'list:List application template revisions.'
             )
             _describe 'command' commands
@@ -7890,7 +8191,9 @@ _gcloud_dispatch() {
                 'code-repository-indexes:Manage Code Repository Index resources.'
                 'code-tools-settings:Manage Code Tools Setting resources.'
                 'data-sharing-with-google-settings:Manage Data Sharing With Google Setting resources.'
+                'gda-observability-settings:Manage Gda Observability Setting resources.'
                 'gemini-gcp-enablement-settings:Manage Gemini Gcp Enablement Setting resources.'
+                'gibq-observability-settings:Manage Gibq Observability Setting resources.'
                 'logging-settings:Manage Logging Setting resources.'
                 'operations:Manage Operation resources.'
                 'release-channel-settings:Manage Release Channel Setting resources.'
@@ -7968,6 +8271,29 @@ _gcloud_dispatch() {
             )
             _describe 'command' commands
             ;;
+        'gcloud gemini gda-observability-settings')
+            local -a commands
+            commands=(
+                'create:Create gdaObservabilitySettings.'
+                'delete:Delete gdaObservabilitySettings.'
+                'describe:Describe gdaObservabilitySettings.'
+                'list:List gdaObservabilitySettings.'
+                'setting-bindings:Manage Setting Binding resources.'
+                'update:Update gdaObservabilitySettings.'
+            )
+            _describe 'command' commands
+            ;;
+        'gcloud gemini gda-observability-settings setting-bindings')
+            local -a commands
+            commands=(
+                'create:Create settingBindings.'
+                'delete:Delete settingBindings.'
+                'describe:Describe settingBindings.'
+                'list:List settingBindings.'
+                'update:Update settingBindings.'
+            )
+            _describe 'command' commands
+            ;;
         'gcloud gemini gemini-gcp-enablement-settings')
             local -a commands
             commands=(
@@ -7981,6 +8307,29 @@ _gcloud_dispatch() {
             _describe 'command' commands
             ;;
         'gcloud gemini gemini-gcp-enablement-settings setting-bindings')
+            local -a commands
+            commands=(
+                'create:Create settingBindings.'
+                'delete:Delete settingBindings.'
+                'describe:Describe settingBindings.'
+                'list:List settingBindings.'
+                'update:Update settingBindings.'
+            )
+            _describe 'command' commands
+            ;;
+        'gcloud gemini gibq-observability-settings')
+            local -a commands
+            commands=(
+                'create:Create gibqObservabilitySettings.'
+                'delete:Delete gibqObservabilitySettings.'
+                'describe:Describe gibqObservabilitySettings.'
+                'list:List gibqObservabilitySettings.'
+                'setting-bindings:Manage Setting Binding resources.'
+                'update:Update gibqObservabilitySettings.'
+            )
+            _describe 'command' commands
+            ;;
+        'gcloud gemini gibq-observability-settings setting-bindings')
             local -a commands
             commands=(
                 'create:Create settingBindings.'
@@ -8433,7 +8782,6 @@ _gcloud_dispatch() {
                 'delete:Delete an IAM workforce identity pool provider SCIM tenant token.'
                 'describe:Describe an IAM workforce identity pool provider SCIM tenant token.'
                 'list:List IAM workforce identity pool provider SCIM tenant tokens.'
-                'undelete:Undelete an IAM workforce identity pool provider SCIM tenant token.'
                 'update:Update an IAM workforce identity pool provider SCIM tenant token.'
             )
             _describe 'command' commands
@@ -8906,6 +9254,7 @@ _gcloud_dispatch() {
                 'operations:Commands for managing operations.'
                 'raw-decrypt:Decrypt a ciphertext file using a raw key.'
                 'raw-encrypt:Encrypt a plaintext file using a raw key.'
+                'retired-resources:Manage retired resources.'
                 'single-tenant-hsm:Commands for managing single tenant HSM instances.'
             )
             _describe 'command' commands
@@ -8994,6 +9343,7 @@ _gcloud_dispatch() {
             commands=(
                 'add-iam-policy-binding:Add IAM policy binding for a kms key.'
                 'create:Create a new key.'
+                'delete:Delete a key.'
                 'describe:Get metadata for a given key.'
                 'get-iam-policy:Get the IAM policy for a key.'
                 'list:List the keys within a keyring.'
@@ -9011,6 +9361,7 @@ _gcloud_dispatch() {
             local -a commands
             commands=(
                 'create:Create a new version.'
+                'delete:Delete a key version.'
                 'describe:Get metadata for a given version.'
                 'destroy:Schedule a version to be destroyed.'
                 'disable:Disable a given version.'
@@ -9035,6 +9386,14 @@ _gcloud_dispatch() {
             local -a commands
             commands=(
                 'describe:View the details of an operation.'
+            )
+            _describe 'command' commands
+            ;;
+        'gcloud kms retired-resources')
+            local -a commands
+            commands=(
+                'describe:Get metadata for a given retired resource.'
+                'list:List the retired resources within a location.'
             )
             _describe 'command' commands
             ;;
@@ -9172,6 +9531,7 @@ _gcloud_dispatch() {
                 'delete:Delete a Logging saved query.'
                 'get:Get a Logging saved query.'
                 'list:List Logging saved queries.'
+                'update:Update Logging saved queries.'
             )
             _describe 'command' commands
             ;;
@@ -9289,6 +9649,7 @@ _gcloud_dispatch() {
                 'export-data:Exports data from Managed Lustre instance to Cloud Storage.'
                 'import-data:Imports data from Cloud Storage to Managed Lustre instance.'
                 'list:List Lustre instances.'
+                'reschedule-maintenance:reschedule instances.'
                 'update:Updates the parameters of a single Managed Lustre instance.'
             )
             _describe 'command' commands
@@ -9482,6 +9843,7 @@ _gcloud_dispatch() {
                 'delete:Delete a Memorystore instance.'
                 'describe:Get details of a Memorystore instance.'
                 'get-certificate-authority:Get certificate authority details of a Memorystore instance.'
+                'get-shared-regional-certificate-authority:Get the shared regional CA certificate bundle for Memorystore.'
                 'list:List all Memorystore instances in a specified project and location.'
                 'reschedule-maintenance:Reschedule maintenance window for an instance.'
                 'update:Update the configuration of a Memorystore instance.'
@@ -9845,7 +10207,7 @@ _gcloud_dispatch() {
             local -a commands
             commands=(
                 'describe:Describe the FloorSetting resource.'
-                'update:Update the FloorSetting resource.'
+                'update:Update a Model Armor floor setting.'
             )
             _describe 'command' commands
             ;;
@@ -10612,7 +10974,13 @@ _gcloud_dispatch() {
             commands=(
                 'custom-intercept:Manage Security Profiles - Custom Intercept Profile.'
                 'custom-mirroring:Manage Security Profiles - Custom Mirroring Profile.'
+                'delete:Delete a Security Profile.'
+                'describe:Describe a Security Profile.'
+                'export:Export Security Profile.'
+                'import:Import Security Profile.'
+                'list:List Security Profiles.'
                 'threat-prevention:Manage Security Profiles - Threat Prevention Profile.'
+                'url-filtering:Security Profiles - Url Filtering Profile commands.'
             )
             _describe 'command' commands
             ;;
@@ -10648,6 +11016,16 @@ _gcloud_dispatch() {
                 'list:List Threat Prevention Security Profiles.'
                 'list-overrides:List overrides of Threat Prevention Profile.'
                 'update-override:Update Overrides of Threat Prevention Profile.'
+            )
+            _describe 'command' commands
+            ;;
+        'gcloud network-security security-profiles url-filtering')
+            local -a commands
+            commands=(
+                'create:Create a new URL Filtering Profile.'
+                'delete:Delete a URL Filtering Profile.'
+                'describe:Describe a URL Filtering Profile.'
+                'list:List URL Filtering Security Profiles.'
             )
             _describe 'command' commands
             ;;
@@ -11821,6 +12199,7 @@ _gcloud_dispatch() {
                 'detach:Detach a secondary cluster.'
                 'detach-secondaries:Detach one or more secondary clusters from the primary cluster.'
                 'get-cluster-certificate-authority:Get the certificate authority information for a Memorystore for Redis Cluster instance.'
+                'get-shared-regional-certificate-authority:Get the shared regional certificate authority certificates for Memorystore for Redis Cluster.'
                 'list:List Memorystore for Redis Cluster instances.'
                 'remove-cluster-endpoints:Remove existing Memorystore cluster endpoints.'
                 'reschedule-maintenance:Reschedule maintenance window for a Memorystore for     Redis Cluster instance.'
@@ -11999,6 +12378,7 @@ _gcloud_dispatch() {
         'gcloud run')
             local -a commands
             commands=(
+                'compose:Support Docker Compose workflows on Cloud Run.'
                 'configurations:View and manage your Cloud Run configurations.'
                 'deploy:Create or update a Cloud Run service.'
                 'domain-mappings:View and manage your Cloud Run for Anthos domain mappings.'
@@ -12008,6 +12388,13 @@ _gcloud_dispatch() {
                 'revisions:View and manage your Cloud Run revisions.'
                 'routes:View your Cloud Run routes.'
                 'services:View and manage your Cloud Run services.'
+            )
+            _describe 'command' commands
+            ;;
+        'gcloud run compose')
+            local -a commands
+            commands=(
+                'up:Deploy to Cloud Run from compose specification.'
             )
             _describe 'command' commands
             ;;
@@ -13006,6 +13393,7 @@ _gcloud_dispatch() {
                 'create:Creates a new Cloud SQL instance.'
                 'delete:Deletes a Cloud SQL instance.'
                 'describe:Displays configuration and metadata about a Cloud SQL instance.'
+                'execute-sql:Executes a statement on a Cloud SQL instance.'
                 'export:\(DEPRECATED\)  Exports data from a Cloud SQL instance.'
                 'failover:Causes a high-availability Cloud SQL instance to failover.'
                 'get-latest-recovery-time:Displays the latest recovery time to which a Cloud SQL instance can be restored to.'
@@ -13481,6 +13869,67 @@ _gcloud_dispatch() {
             )
             _describe 'command' commands
             ;;
+        'gcloud vector-search')
+            local -a commands
+            commands=(
+                'collections:Manage Collection resources.'
+                'operations:Manage Operation resources.'
+            )
+            _describe 'command' commands
+            ;;
+        'gcloud vector-search collections')
+            local -a commands
+            commands=(
+                'create:Create a collection.'
+                'data-objects:Manage Vector Search data objects.'
+                'delete:Delete a collection.'
+                'describe:Describe a collection.'
+                'export-data-objects:Export data objects from a collection.'
+                'import-data-objects:Import data objects into a collection.'
+                'indexes:Manage Index resources.'
+                'list:List collections.'
+                'update:Update a collection.'
+            )
+            _describe 'command' commands
+            ;;
+        'gcloud vector-search collections data-objects')
+            local -a commands
+            commands=(
+                'aggregate:Aggregate data objects.'
+                'batch-create:Create a batch of data objects.'
+                'batch-delete:Delete a batch of data objects.'
+                'batch-search:Batch search data objects from a Vector Search collection.'
+                'batch-update:Update a batch of data objects.'
+                'create:Create a data object.'
+                'delete:Delete a data object.'
+                'describe:Describe a data object.'
+                'query:Query data objects from a Vector Search collection.'
+                'search:Search data objects from a Vector Search collection.'
+                'update:Update a data object.'
+            )
+            _describe 'command' commands
+            ;;
+        'gcloud vector-search collections indexes')
+            local -a commands
+            commands=(
+                'create:Create an index.'
+                'delete:Delete an index.'
+                'describe:Describe an index.'
+                'list:List indexes.'
+            )
+            _describe 'command' commands
+            ;;
+        'gcloud vector-search operations')
+            local -a commands
+            commands=(
+                'cancel:Cancel an operation.'
+                'delete:Delete an operation.'
+                'describe:Describe an operation.'
+                'list:List operations.'
+                'wait:Wait for an operation to complete.'
+            )
+            _describe 'command' commands
+            ;;
         'gcloud vmware')
             local -a commands
             commands=(
@@ -13616,6 +14065,7 @@ _gcloud_dispatch() {
                 'list:List Google Cloud VMware Engine private clouds.'
                 'logging-servers:Manage logging-server in Google Cloud VMware Engine.'
                 'management-dns-zone-bindings:Manage Management DNS zone bindings in Google Cloud VMware Engine.'
+                'migrate-management-vms:Migrate the management VMs of a private cloud to a workload cluster.'
                 'nsx:Manage NSX using Google Cloud VMware Engine.'
                 'subnets:Manage vmware subnets in Google Cloud VMware Engine.'
                 'undelete:Cancel deletion of a Google Cloud VMware Engine private cloud.'
