@@ -52,6 +52,7 @@ _gcloud_dispatch() {
                 'backup-dr:Manage Backup and DR resources.'
                 'batch:Manage Batch resources.'
                 'beyondcorp:Manage Beyondcorp resources.'
+                'biglake:Create and manage Google Cloud BigLake resources.'
                 'bigtable:Manage your Cloud Bigtable storage.'
                 'billing:Manage billing accounts and associate them with projects.'
                 'bms:Manage Bare Metal Solution resources.'
@@ -101,7 +102,7 @@ _gcloud_dispatch() {
                 'iap:Manage IAP policies.'
                 'identity:Manage Cloud Identity Groups and Memberships resources.'
                 'ids:Manage Cloud IDS.'
-                'immersive-stream:Manage Immersive Stream resources.'
+                'immersive-stream:\(REMOVED\)  Manage Immersive Stream resources.'
                 'info:Display information about the current gcloud environment.'
                 'infra-manager:Manage Infra Manager resources.'
                 'init:Initialize or reinitialize gcloud.'
@@ -166,6 +167,7 @@ _gcloud_dispatch() {
                 'vmware:Manage Google Cloud VMware Engine resources.'
                 'workbench:Workbench Command Group.'
                 'workflows:Manage your Cloud Workflows resources.'
+                'workload-identity:Manage Workload Identity.'
                 'workspace-add-ons:Manage Google Workspace Add-ons resources.'
                 'workstations:Manage Cloud Workstations resources.'
             )
@@ -1994,6 +1996,48 @@ _gcloud_dispatch() {
             )
             _describe 'command' commands
             ;;
+        'gcloud biglake')
+            local -a commands
+            commands=(
+                'iceberg:Biglake Iceberg REST Catalogs.'
+            )
+            _describe 'command' commands
+            ;;
+        'gcloud biglake iceberg')
+            local -a commands
+            commands=(
+                'catalogs:Manage BigLake Iceberg REST catalogs.'
+                'namespaces:Manage BigLake Iceberg REST catalog namespaces.'
+            )
+            _describe 'command' commands
+            ;;
+        'gcloud biglake iceberg catalogs')
+            local -a commands
+            commands=(
+                'create:Create a BigLake Iceberg REST catalog.'
+                'delete:Delete a BigLake Iceberg REST catalog.'
+                'describe:Describe a BigLake Iceberg REST catalog.'
+                'failover:Failover a BigLake Iceberg REST catalog.'
+                'get-iam-policy:Get the IAM policy for a BigLake Iceberg REST catalog.'
+                'list:List BigLake Iceberg REST catalogs.'
+                'set-iam-policy:Set the IAM policy for a BigLake Iceberg REST catalog.'
+                'update:Update a BigLake Iceberg REST catalog.'
+            )
+            _describe 'command' commands
+            ;;
+        'gcloud biglake iceberg namespaces')
+            local -a commands
+            commands=(
+                'create:Create a BigLake Iceberg REST namespace.'
+                'delete:Delete a BigLake Iceberg REST namespace.'
+                'describe:Describe a BigLake Iceberg REST namespace.'
+                'get-iam-policy:Get the IAM policy for a BigLake Iceberg REST catalog namespace.'
+                'list:List BigLake Iceberg REST namespaces.'
+                'set-iam-policy:Set the IAM policy for a BigLake Iceberg REST catalog namespace.'
+                'update:Update a BigLake Iceberg REST namespace.'
+            )
+            _describe 'command' commands
+            ;;
         'gcloud bigtable')
             local -a commands
             commands=(
@@ -2994,6 +3038,7 @@ _gcloud_dispatch() {
                 'create:Create a composite health check.'
                 'delete:Delete a composite health check.'
                 'describe:Describe a composite health check.'
+                'get-health:Get health status of a composite health check.'
                 'list:List composite health checks.'
                 'update:Update a composite health check.'
             )
@@ -3039,6 +3084,7 @@ _gcloud_dispatch() {
                 'stop-async-replication:Stop async replication on a Compute Engine persistent disk.'
                 'stop-group-async-replication:Consistently stops a group of asynchronously replicating disks.'
                 'update:Update a Compute Engine persistent disk.'
+                'update-kms-key:Update the KMS key of a persistent disk.'
             )
             _describe 'command' commands
             ;;
@@ -3188,6 +3234,7 @@ _gcloud_dispatch() {
                 'create:Create a health source.'
                 'delete:Delete a health source.'
                 'describe:Describe a health source.'
+                'get-health:Get health status of a health source.'
                 'list:List health sources.'
                 'update:Update a health source.'
             )
@@ -4136,6 +4183,7 @@ _gcloud_dispatch() {
             local -a commands
             commands=(
                 'describe:Describe a Compute Engine reservation slot.'
+                'get-version:Get the version of a reservation slot.'
                 'list:List Compute Engine reservation slots.'
             )
             _describe 'command' commands
@@ -4144,6 +4192,7 @@ _gcloud_dispatch() {
             local -a commands
             commands=(
                 'describe:Describe a Compute Engine reservation sub-block.'
+                'get-version:Get the version of a reservation sub-block.'
                 'list:List Compute Engine reservation sub-blocks.'
                 'perform-maintenance:Perform maintenance on a reservation sub-block.'
                 'report-subblock-as-faulty:Report a sub-block within a reservation as faulty.'
@@ -4338,6 +4387,7 @@ _gcloud_dispatch() {
                 'remove-labels:Remove labels from Google Compute Engine snapshots.'
                 'set-iam-policy:Set the IAM policy for a Compute Engine snapshot.'
                 'update:Update a Compute Engine snapshot.'
+                'update-kms-key:Update the KMS key of a Compute Engine snapshot.'
             )
             _describe 'command' commands
             ;;
@@ -6138,14 +6188,12 @@ _gcloud_dispatch() {
             commands=(
                 'aspect-types:Manage Dataplex Aspect Types.'
                 'assets:Manage Dataplex Asset resources.'
-                'content:Manage Dataplex Content.'
                 'context:Manage Dataplex Context.'
                 'datascans:Manage Dataplex Datascan.'
                 'encryption-config:Manage Dataplex encryption configs.'
                 'entries:Manage Dataplex Catalog Entries resources.'
                 'entry-groups:Manage Dataplex Entry Groups.'
                 'entry-types:Manage Dataplex Entry Types.'
-                'environments:Manage Dataplex Environments.'
                 'glossaries:Manage Dataplex glossaries.'
                 'lakes:Manage Dataplex Lake resources.'
                 'metadata-jobs:Manage Dataplex metadata jobs.'
@@ -6189,21 +6237,6 @@ _gcloud_dispatch() {
             local -a commands
             commands=(
                 'list:List Dataplex asset actions.'
-            )
-            _describe 'command' commands
-            ;;
-        'gcloud dataplex content')
-            local -a commands
-            commands=(
-                'add-iam-policy-binding:Adds IAM policy binding to a Dataplex Content.'
-                'create:Creating a content.'
-                'delete:Delete a Dataplex Content Resource.'
-                'describe:Retrieve a Dataplex Content Resource.'
-                'get-iam-policy:Retrieve the IAM policy for a Dataplex Content.'
-                'list:List Dataplex Content Resources.'
-                'remove-iam-policy-binding:Removes IAM policy binding from a Dataplex Content.'
-                'set-iam-policy:Set the IAM policy to a Dataplex Content as defined in a JSON or YAML file.'
-                'update:Update a Dataplex Content Resource with the given configurations.'
             )
             _describe 'command' commands
             ;;
@@ -6308,29 +6341,6 @@ _gcloud_dispatch() {
                 'remove-iam-policy-binding:Remove IAM policy binding from a Dataplex Entry Type.'
                 'set-iam-policy:Set an IAM policy binding for a Dataplex Entry Type as defined in a JSON or YAML file.'
                 'update:Update a Dataplex Entry Type.'
-            )
-            _describe 'command' commands
-            ;;
-        'gcloud dataplex environments')
-            local -a commands
-            commands=(
-                'add-iam-policy-binding:Adds IAM policy binding to a Dataplex Environment.'
-                'create:Create a Dataplex Environment.'
-                'delete:Delete a Dataplex Environment.'
-                'describe:Retrieve a Dataplex Environment.'
-                'get-iam-policy:Retrieve a Dataplex Environment IAM policy.'
-                'list:List Dataplex Environments.'
-                'remove-iam-policy-binding:Removes IAM policy binding from a Dataplex Environment.'
-                'sessions:Manage Dataplex Sessions services.'
-                'set-iam-policy:Set an IAM policy binding for a Dataplex Environment as defined in a JSON or YAML file.'
-                'update:Update a Dataplex Environment with the given configurations.'
-            )
-            _describe 'command' commands
-            ;;
-        'gcloud dataplex environments sessions')
-            local -a commands
-            commands=(
-                'list:List Sessions associated with a Environment.'
             )
             _describe 'command' commands
             ;;
@@ -6997,6 +7007,7 @@ _gcloud_dispatch() {
                 'describe:Describe a space.'
                 'get-iam-policy:Get the IAM policy for a Design Center space.'
                 'list:List spaces.'
+                'register-app-hub-application-resources:Registration of App Hub application resources.'
                 'set-iam-policy:Set the IAM policy for a Design Center space as defined in a JSON/YAML file.'
                 'shared-templates:Manage shared template resources.'
                 'test-iam-permissions:Test IAM permissions for a Design Center space.'
@@ -9097,48 +9108,48 @@ _gcloud_dispatch() {
         'gcloud immersive-stream')
             local -a commands
             commands=(
-                'xr:Manage Immersive Stream resources.'
+                'xr:\(REMOVED\)  Manage Immersive Stream resources.'
             )
             _describe 'command' commands
             ;;
         'gcloud immersive-stream xr')
             local -a commands
             commands=(
-                'contents:Manage Immersive Stream for XR contents.'
-                'instances:Manage Immersive Stream for XR instances.'
-                'operations:Manage Immersive Stream for XR operations.'
+                'contents:\(REMOVED\)  Manage Immersive Stream for XR contents.'
+                'instances:\(REMOVED\)  Manage Immersive Stream for XR instances.'
+                'operations:\(REMOVED\)  Manage Immersive Stream for XR operations.'
             )
             _describe 'command' commands
             ;;
         'gcloud immersive-stream xr contents')
             local -a commands
             commands=(
-                'build:Build an Immersive Stream for XR content resource.'
-                'create:Create an Immersive Stream for XR content resource.'
-                'delete:Delete an Immersive Stream for XR content resource.'
-                'describe:Describe a specific Immersive Stream for XR content resource.'
-                'list:List Immersive Stream for XR content resources.'
-                'update:Update an Immersive Stream for XR content resource.'
+                'build:\(REMOVED\)  Build an Immersive Stream for XR content resource.'
+                'create:\(REMOVED\)  Create an Immersive Stream for XR content resource.'
+                'delete:\(REMOVED\)  Delete an Immersive Stream for XR content resource.'
+                'describe:\(REMOVED\)  Describe a specific Immersive Stream for XR content resource.'
+                'list:\(REMOVED\)  List Immersive Stream for XR content resources.'
+                'update:\(REMOVED\)  Update an Immersive Stream for XR content resource.'
             )
             _describe 'command' commands
             ;;
         'gcloud immersive-stream xr instances')
             local -a commands
             commands=(
-                'create:Create an Immersive Stream for XR service instance.'
-                'delete:Delete an Immersive Stream for XR service instance.'
-                'describe:Describe a specific Immersive Stream for XR service instance.'
-                'list:List Immersive Stream for XR service instances.'
-                'update:Update an Immersive Stream for XR service instance.'
+                'create:\(REMOVED\)  Create an Immersive Stream for XR service instance.'
+                'delete:\(REMOVED\)  Delete an Immersive Stream for XR service instance.'
+                'describe:\(REMOVED\)  Describe a specific Immersive Stream for XR service instance.'
+                'list:\(REMOVED\)  List Immersive Stream for XR service instances.'
+                'update:\(REMOVED\)  Update an Immersive Stream for XR service instance.'
             )
             _describe 'command' commands
             ;;
         'gcloud immersive-stream xr operations')
             local -a commands
             commands=(
-                'describe:Get description of a long-running Immersive Stream for XR operation.'
-                'list:List Immersive Stream for XR operations.'
-                'wait:Poll long-running Immersive Stream for XR operation until it completes.'
+                'describe:\(REMOVED\)  Get description of a long-running Immersive Stream for XR operation.'
+                'list:\(REMOVED\)  List Immersive Stream for XR operations.'
+                'wait:\(REMOVED\)  Poll long-running Immersive Stream for XR operation until it completes.'
             )
             _describe 'command' commands
             ;;
@@ -9529,7 +9540,7 @@ _gcloud_dispatch() {
             commands=(
                 'create:Create a Logging saved query.'
                 'delete:Delete a Logging saved query.'
-                'get:Get a Logging saved query.'
+                'describe:A command that describes a Logging saved query.'
                 'list:List Logging saved queries.'
                 'update:Update Logging saved queries.'
             )
@@ -9809,10 +9820,22 @@ _gcloud_dispatch() {
         'gcloud memorystore')
             local -a commands
             commands=(
+                'acl-policies:Manage Acl Policy resources.'
                 'backup-collections:Manage Backup Collection resources.'
                 'instances:Manage Instance resources.'
                 'locations:Manage Memorystore for Valkey locations.'
                 'operations:Manage Memorystore operations.'
+            )
+            _describe 'command' commands
+            ;;
+        'gcloud memorystore acl-policies')
+            local -a commands
+            commands=(
+                'create:Create aclPolicies.'
+                'delete:Delete aclPolicies.'
+                'describe:Describe aclPolicies.'
+                'list:List aclPolicies.'
+                'update:Update aclPolicies.'
             )
             _describe 'command' commands
             ;;
@@ -11378,6 +11401,7 @@ _gcloud_dispatch() {
             local -a commands
             commands=(
                 'scopes:Manage Scope resources.'
+                'trace-scopes:Manage Trace Scope resources.'
             )
             _describe 'command' commands
             ;;
@@ -11386,6 +11410,17 @@ _gcloud_dispatch() {
             commands=(
                 'describe:Describe scopes.'
                 'update:Update scopes.'
+            )
+            _describe 'command' commands
+            ;;
+        'gcloud observability trace-scopes')
+            local -a commands
+            commands=(
+                'create:Create traceScopes.'
+                'delete:Delete traceScopes.'
+                'describe:Describe traceScopes.'
+                'list:List traceScopes.'
+                'update:Update traceScopes.'
             )
             _describe 'command' commands
             ;;
@@ -12178,11 +12213,23 @@ _gcloud_dispatch() {
         'gcloud redis')
             local -a commands
             commands=(
+                'acl-policies:Manage ACL policies of Memorystore for Redis Cluster instances.'
                 'clusters:Manage Memorystore for Redis Cluster instances.'
                 'instances:Manage Cloud Memorystore Redis instances.'
                 'operations:Manage Cloud Memorystore Redis operations.'
                 'regions:Manage Cloud Memorystore Redis regions.'
                 'zones:Manage Cloud Memorystore Redis zones.'
+            )
+            _describe 'command' commands
+            ;;
+        'gcloud redis acl-policies')
+            local -a commands
+            commands=(
+                'create:Create a Redis ACL Policy.'
+                'delete:Delete a Redis ACL Policy.'
+                'describe:Show metadata for a Memorystore for Redis Cluster ACL policy.'
+                'list:List Redis ACL Policies.'
+                'update:Update aclPolicies.'
             )
             _describe 'command' commands
             ;;
@@ -13397,9 +13444,11 @@ _gcloud_dispatch() {
                 'export:\(DEPRECATED\)  Exports data from a Cloud SQL instance.'
                 'failover:Causes a high-availability Cloud SQL instance to failover.'
                 'get-latest-recovery-time:Displays the latest recovery time to which a Cloud SQL instance can be restored to.'
+                'get-storage-shrink-config:Displays the minimum storage size to which a Cloud SQL instance can be decreased.'
                 'import:\(DEPRECATED\)  Imports data into a Cloud SQL instance from Google Cloud Storage.'
                 'list:Lists Cloud SQL instances in a given project.'
                 'patch:Updates the settings of a Cloud SQL instance.'
+                'perform-storage-shrink:Performs a storage size decrease of a Cloud SQL instance.'
                 'point-in-time-restore:Performs a point in time restore for a Cloud SQL instance managed by Google Cloud Backup and Disaster Recovery \(DR\) Service.'
                 'pre-check-major-version-upgrade:Performs pre-checks for a major version upgrade of a Cloud SQL instance.'
                 'promote-replica:Promotes Cloud SQL read replica to a stand-alone instance.'
@@ -13426,6 +13475,7 @@ _gcloud_dispatch() {
             local -a commands
             commands=(
                 'client-certs:Provide commands for managing client certificates of Cloud SQL instances.'
+                'entraid-certs:Provide commands for managing Entra ID certificates of Cloud SQL instances.'
                 'server-ca-certs:Provide commands for managing server CA certs of Cloud SQL instances.'
                 'server-certs:Provide commands for managing server certificates of Cloud SQL instances.'
             )
@@ -13438,6 +13488,16 @@ _gcloud_dispatch() {
                 'delete:Delete a client certificate for a Cloud SQL instance.'
                 'describe:Retrieve information about a client cert for a Cloud SQL instance.'
                 'list:List all client certs for a Cloud SQL instance.'
+            )
+            _describe 'command' commands
+            ;;
+        'gcloud sql ssl entraid-certs')
+            local -a commands
+            commands=(
+                'create:Create an Entra ID certificate for a Cloud SQL instance.'
+                'list:List all Entra ID certificates for a Cloud SQL instance.'
+                'rollback:Roll back to the previous Entra ID certificate for a Cloud SQL instance.'
+                'rotate:Rotate in the upcoming Entra ID certificate for a Cloud SQL instance.'
             )
             _describe 'command' commands
             ;;
@@ -14311,6 +14371,20 @@ _gcloud_dispatch() {
                 'list:List workflow executions.'
                 'wait:Wait for an execution to complete.'
                 'wait-last:Wait for the last cached workflow execution to complete.'
+            )
+            _describe 'command' commands
+            ;;
+        'gcloud workload-identity')
+            local -a commands
+            commands=(
+                'service-agents:Manage Service Agents for Workload Identity.'
+            )
+            _describe 'command' commands
+            ;;
+        'gcloud workload-identity service-agents')
+            local -a commands
+            commands=(
+                'generate:Generate service agents for a service producer.'
             )
             _describe 'command' commands
             ;;
